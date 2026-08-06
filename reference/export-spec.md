@@ -2,9 +2,16 @@
 
 ## Output Format
 
-- **Resolution:** 1080 × 1920 pixels (Play Store standard)
 - **Format:** PNG (lossless)
 - **Batch:** ZIP archive containing individual PNGs
+
+## Store Presets
+
+| Store | Resolution | Aspect | Max file size |
+|-------|-----------|--------|---------------|
+| Play Store (phone) | 1080 × 1920 | 9:16 | ≤ 8 MB |
+| App Store (phone) | 1290 × 2796 | ~9:19.5 | ≤ 8 MB |
+| App Store (tablet) | 2048 × 2732 | 4:3 | ≤ 8 MB |
 
 ## Play Store Requirements
 
@@ -16,7 +23,21 @@
 | File size | ≤ 8 MB per screenshot |
 | Recommended | 1080 × 1920 |
 
+## App Store Requirements
+
+| Requirement | Value |
+|-------------|-------|
+| iPhone 6.7" | 1290 × 2796 |
+| iPad Pro 12.9" | 2048 × 2732 |
+| Format | PNG or JPEG |
+| File size | ≤ 8 MB per screenshot |
+
 ## File Naming
 
 - Single export: `telor-frame.png`
 - Batch export: `screen_1.png`, `screen_2.png`, ... (inside ZIP)
+- telor_capture output: `{screen}_{device}.png` (e.g. `home_pixel7.png`)
+
+## Session Export
+
+Telor Web generates `session.json` alongside exports for Telor View preview via QR code.
