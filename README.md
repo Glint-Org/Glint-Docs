@@ -1,24 +1,38 @@
 # Telor Docs
 
-Internal reference for the Telor ecosystem — 3 repos, 1 workflow.
+Reference documentation for the Telor screenshot automation ecosystem.
 
 ## Repos
 
-| Repo | Description | Visibility |
-|------|-------------|------------|
-| Telor-Bridge | ADB + Appium capture engine (Python) | Public |
-| Telor-Web | Frame/design/export editor (React + Vite) | Public |
-| Telor-View | Play Store preview app (Flutter) | Private |
+| Repo | Purpose |
+|------|---------|
+| **Telor-Capture** | Flutter package — device-free golden screenshot capture |
+| **Telor-Bridge** | Python ADB capture engine for Android devices |
+| **Telor-Web** | React editor with viral templates and batch export |
+| **Telor-View** | Flutter Play/App Store preview app |
 
-## Contents
+## Guides
 
-- `guides/` — setup, workflow, dev environment
-- `reference/` — API specs, JSON schemas, architecture
+- [Setup](guides/setup.md) — install all components
+- [Workflow](guides/workflow.md) — end-to-end capture → design → preview
 
-## Quick Links
+## Reference
 
-- [Architecture Overview](reference/architecture.md)
-- [Bridge WebSocket Protocol](reference/websocket-protocol.md)
-- [Session JSON Schema](reference/session-schema.md)
-- [Setup Guide](guides/setup.md)
-- [Development Workflow](guides/workflow.md)
+- [Architecture](reference/architecture.md) — system overview and data flow
+- [Session Schema](reference/session-schema.md) — JSON format for cross-tool handoff
+- [Export Spec](reference/export-spec.md) — store dimension requirements
+- [WebSocket Protocol](reference/websocket-protocol.md) — Bridge API
+- [Frames](reference/frames.md) — device frame SVG guide
+- [Project Structure](reference/project-structure.md) — repo layout
+
+## Quick Workflow
+
+```
+telor_capture → session.json + PNGs → Telor Web templates → ZIP export → Telor View QR
+```
+
+Or for non-Flutter apps:
+
+```
+Telor Bridge (ADB) → output/session.json → Telor Web → Telor View
+```
