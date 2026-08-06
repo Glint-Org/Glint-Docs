@@ -4,26 +4,66 @@
 
 | Tool | Version | For |
 |------|---------|-----|
+| [FVM](https://fvm.app) | Latest | Flutter version management |
+| Flutter | **3.44.1** (via FVM) | Telor View, Telor Capture |
 | Python | 3.10+ | Telor Bridge |
 | Node.js | 18+ | Telor Web |
-| Flutter | 3.x | Telor View |
-| ADB | Latest | Android device connection |
+| ADB | Latest | Android device connection (Bridge) |
 
-## Telor Bridge
+## FVM Setup (Flutter projects)
+
+All Flutter apps and packages use **FVM 3.44.1**:
+
+```bash
+# Install FVM (once)
+dart pub global activate fvm
+
+# Telor View
+cd Telor-View
+fvm use 3.44.1
+fvm flutter pub get
+
+# Telor Capture
+cd Telor-Capture
+fvm use 3.44.1
+fvm flutter pub get
+
+# Example app
+cd Telor-Capture/example
+fvm use 3.44.1
+fvm flutter pub get
+```
+
+Android builds use **Gradle 8.14**, **targetSDK 36**, and **16KB page alignment** for modern device compatibility.
+
+## Telor Capture (Flutter — no device needed)
+
+```bash
+cd Telor-Capture/example
+fvm flutter pub get
+
+# Run screenshot rules
+fvm dart run telor_capture --app ExampleApp --output build/telor_screenshots
+
+# Output: build/telor_screenshots/session.json + PNGs
+```
+
+## Telor Bridge (Android device capture)
 
 ```bash
 cd Telor-Bridge
 python -m venv venv
-venv\Scripts\activate      # Windows
-# source venv/bin/activate # Mac/Linux
+source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
-# Run server mode
-python -m bridge.main
-
-# Or single capture
-python -m bridge.main capture
+python -m bridge.main devices
+python -m bridge.main capture --app "My App"
+python -m bridge.main batch --count 5
+python -m bridge.main crawl --package com.example.app   # requires Appium
+python -m bridge.main server   # WebSocket on :7700
 ```
+
+Output: `output/session.json` + PNGs
 
 ## Telor Web
 
@@ -34,18 +74,31 @@ npm run dev
 # Opens at http://localhost:5173
 ```
 
+1. Import session folder or upload screenshots
+2. Pick a viral template
+3. Batch export ZIP
+4. Scan QR with Telor View
+
 ## Telor View
 
 ```bash
 cd Telor-View
-flutter pub get
-flutter run
-# Select connected Android device or emulator
+fvm flutter pub get
+fvm flutter run
 ```
 
-## Verify Connection
+- Scan QR from Telor Web export
+- Or paste session JSON manually
 
-1. Start Bridge server: `python -m bridge.main` (listens on ws://localhost:7700)
-2. Start Web: `npm run dev`
-3. Open Web in browser — should show "Bridge Connected" badge in editor
-4. Click "Capture from Device" to test
+## Verify End-to-End
+
+1. `cd Telor-Capture/example && fvm dart run telor_capture`
+2. `cd Telor-Web && npm run dev` → import `build/telor_screenshots/`
+3. Pick template → Export ZIP
+4. `cd Telor-View && fvm flutter run` → scan QR or paste JSON
+
+## Optional: Bridge + Web live capture
+
+1. `python -m bridge.main server`
+2. `npm run dev` in Telor-Web
+3. Editor shows "Bridge Connected" → Capture from Device
