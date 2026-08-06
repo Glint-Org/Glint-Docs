@@ -14,13 +14,47 @@ Response: `{ "type": "pong" }`
 ```json
 { "action": "capture_single" }
 ```
-Response: `{ "type": "screenshot", "path": "output/screenshot_0001.png" }`
+Response:
+```json
+{
+  "type": "screenshot",
+  "path": "output/screenshot_0001.png",
+  "session": { "app": "Captured App", "screens": ["screenshot_0001.png"], "version": "1.0" }
+}
+```
 
 ### `capture_batch`
 ```json
-{ "action": "capture_batch", "count": 5 }
+{ "action": "capture_batch", "count": 5, "app": "My App", "tagline": "Optional tagline" }
 ```
-Response: `{ "type": "batch_result", "paths": ["output/batch_0001.png", ...] }`
+Response:
+```json
+{
+  "type": "batch_result",
+  "paths": ["output/batch_0001.png", "..."],
+  "session": { "app": "My App", "screens": ["batch_0001.png", "..."], "version": "1.0" }
+}
+```
+
+### `crawl`
+Auto-navigate app via Appium and capture sequential screenshots.
+```json
+{ "action": "crawl", "package": "com.example.app", "max_screens": 20, "app": "My App" }
+```
+Response:
+```json
+{
+  "type": "crawl_result",
+  "paths": ["output/crawl_0001.png", "..."],
+  "session": { "app": "My App", "screens": ["crawl_0001.png", "..."] }
+}
+```
+
+### `get_session`
+```json
+{ "action": "get_session" }
+```
+Response: `{ "type": "session", "session": { ... } }`
 
 ### `list_devices`
 ```json
@@ -45,3 +79,12 @@ Response: `{ "type": "connect_result", "success": true }`
 ```json
 { "type": "error", "message": "Unknown action: ..." }
 ```
+
+## CLI Equivalents
+
+| WebSocket action | CLI command |
+|-----------------|-------------|
+| capture_single | `python -m bridge.main capture --app "My App"` |
+| capture_batch | `python -m bridge.main batch --count 5` |
+| crawl | `python -m bridge.main crawl --package com.example.app` |
+| server | `python -m bridge.main server` |
