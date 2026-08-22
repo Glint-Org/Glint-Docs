@@ -1,6 +1,6 @@
 # Device Frames
 
-SVG-based device frames are stored in `Telor-Web/public/frames/`.
+SVG-based device frames are stored in `Glint-Web/public/frames/`.
 
 ## Supported Devices
 

@@ -2,21 +2,21 @@
 
 ```
          ┌──────────────────────────────┐
-         │   TELOR CAPTURE (Public)      │
+         │   GLINT CAPTURE (Public)      │
          │   Flutter package + CLI       │
          │   Golden screenshot rules     │
          └────────────┬─────────────────┘
                       │ session.json + PNGs
                       ▼
          ┌──────────────────────────────┐
-         │   TELOR BRIDGE (Public)       │
+         │   GLINT BRIDGE (Public)       │
          │   ADB + Appium + crawler     │
          │   Python CLI + WebSocket     │
          └────────────┬─────────────────┘
                       │ ws://localhost:7700
                       ▼
          ┌──────────────────────────────┐
-         │   TELOR WEB (Public)          │
+         │   GLINT WEB (Public)          │
          │   React + Vite + Fabric.js   │
          │   Templates + batch export   │
          │   AdSense revenue layer      │
@@ -24,7 +24,7 @@
                       │ QR / session JSON
                       ▼
          ┌──────────────────────────────┐
-         │   TELOR VIEW (Private)        │
+         │   GLINT VIEW (Private)        │
          │   Flutter + AdMob            │
          │   Play / App Store preview   │
          └──────────────────────────────┘
@@ -34,13 +34,13 @@
 
 | Path | Tool | Requires Device |
 |------|------|-----------------|
-| Code-based | `telor_capture` Flutter package | No |
-| Device-based | Telor Bridge (ADB) | Yes (Android) |
-| Manual | Upload to Telor Web | No |
+| Code-based | `glint_capture` Flutter package | No |
+| Device-based | Glint Bridge (ADB) | Yes (Android) |
+| Manual | Upload to Glint Web | No |
 
 ## Data Flow
 
-1. **Capture** — `telor_capture` generates PNGs via golden tests, OR Bridge captures via ADB
+1. **Capture** — `glint_capture` generates PNGs via golden tests, OR Bridge captures via ADB
 2. **Session** — Both paths emit `session.json` with ordered screenshot list
 3. **Design** — Web imports session, applies viral template to all screens, batch exports
 4. **Preview** — View loads session JSON (QR scan or paste), renders store-style preview
@@ -49,7 +49,7 @@
 
 | Layer | Method |
 |-------|--------|
-| Telor Web | Google AdSense (banner + interstitial) |
-| Telor View | Google AdMob (AppOpen ad on launch) |
-| Telor Bridge | OSS — drives ecosystem traffic |
-| Telor Capture | OSS pub.dev package — drives ecosystem traffic |
+| Glint Web | Google AdSense (banner + interstitial) |
+| Glint View | Google AdMob (AppOpen ad on launch) |
+| Glint Bridge | OSS — drives ecosystem traffic |
+| Glint Capture | OSS pub.dev package — drives ecosystem traffic |

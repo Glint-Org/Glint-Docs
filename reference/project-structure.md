@@ -1,22 +1,22 @@
 # Project Structure
 
 ```
-Telor-Org/
+Glint-Org/
 ├── plan.md                          # Master plan & strategy
-├── Telor-Capture/                   # Public - Flutter screenshot package
+├── Glint-Capture/                   # Public - Flutter screenshot package
 │   ├── lib/
-│   │   ├── telor_capture.dart       # Public API
+│   │   ├── glint_capture.dart       # Public API
 │   │   └── src/
 │   │       ├── devices.dart         # Device presets
-│   │       ├── rules.dart           # TelorRule, templates
+│   │       ├── rules.dart           # GLINTRule, templates
 │   │       ├── runner.dart          # Alchemist orchestration
 │   │       ├── session.dart         # session.json writer
 │   │       └── pump.dart            # Pump helpers
-│   ├── bin/telor_capture.dart       # CLI entry
+│   ├── bin/glint_capture.dart       # CLI entry
 │   ├── example/                     # Sample app + rules
 │   └── test/
 │
-├── Telor-Bridge/                    # Public - Capture engine (Python)
+├── Glint-Bridge/                    # Public - Capture engine (Python)
 │   ├── bridge/
 │   │   ├── main.py                  # CLI entry point
 │   │   ├── adb_usb.py              # USB ADB device management
@@ -31,7 +31,7 @@ Telor-Org/
 │   ├── output/                     # Screenshot output directory
 │   └── requirements.txt
 │
-├── Telor-Web/                       # Public - Design editor (React)
+├── Glint-Web/                       # Public - Design editor (React)
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── UploadZone.jsx      # Drag & drop upload
@@ -39,13 +39,13 @@ Telor-Org/
 │   │   │   ├── TemplateGallery.jsx # Viral template picker
 │   │   │   ├── BatchProcessor.jsx  # Batch template export
 │   │   │   ├── ScreenshotReorder.jsx
-│   │   │   ├── QRExporter.jsx      # QR for Telor View
+│   │   │   ├── QRExporter.jsx      # QR for Glint View
 │   │   │   ├── FrameEditor.jsx     # Canvas wrapper
 │   │   │   ├── ThemeSelector.jsx   # Background theme picker
 │   │   │   ├── ExportManager.jsx   # PNG/ZIP export
 │   │   │   └── AdSlot.jsx          # AdSense placeholder
 │   │   ├── hooks/
-│   │   │   └── useTelorBridge.js   # WebSocket client hook
+│   │   │   └── useGLINTBridge.js   # WebSocket client hook
 │   │   ├── utils/
 │   │   │   ├── canvasEngine.js     # Fabric.js operations
 │   │   │   ├── templateEngine.js   # Template rendering
@@ -61,7 +61,7 @@ Telor-Org/
 │   │   └── templates/              # Viral template JSON definitions
 │   └── vite.config.js
 │
-├── Telor-View/                      # Private - Preview app (Flutter)
+├── Glint-View/                      # Private - Preview app (Flutter)
 │   ├── lib/
 │   │   ├── main.dart               # App entry + routes
 │   │   ├── screens/
@@ -75,7 +75,7 @@ Telor-Org/
 │   │       └── session_loader.dart
 │   └── pubspec.yaml
 │
-└── Telor-Docs/                      # Local only - Reference docs
+└── Glint-Docs/                      # Local only - Reference docs
     ├── README.md
     ├── guides/
     │   ├── setup.md

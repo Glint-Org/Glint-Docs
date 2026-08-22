@@ -1,15 +1,15 @@
-# Telor Docs
+# Glint Docs
 
-Reference documentation for the Telor screenshot automation ecosystem.
+Reference documentation for the Glint screenshot automation ecosystem.
 
 ## Repos
 
 | Repo | Purpose |
 |------|---------|
-| **Telor-Capture** | Flutter package — device-free golden screenshot capture |
-| **Telor-Bridge** | Python ADB capture engine for Android devices |
-| **Telor-Web** | React editor with viral templates and batch export |
-| **Telor-View** | Flutter Play/App Store preview app |
+| **Glint-Capture** | Flutter package — device-free golden screenshot capture |
+| **Glint-Bridge** | Python ADB capture engine for Android devices |
+| **Glint-Web** | React editor with viral templates and batch export |
+| **Glint-View** | Flutter Play/App Store preview app |
 
 ## Guides
 
@@ -28,11 +28,11 @@ Reference documentation for the Telor screenshot automation ecosystem.
 ## Quick Workflow
 
 ```
-telor_capture → session.json + PNGs → Telor Web templates → ZIP export → Telor View QR
+glint_capture → session.json + PNGs → Glint Web templates → ZIP export → Glint View QR
 ```
 
 Or for non-Flutter apps:
 
 ```
-Telor Bridge (ADB) → output/session.json → Telor Web → Telor View
+Glint Bridge (ADB) → output/session.json → Glint Web → Glint View
 ```

@@ -34,10 +34,10 @@
 
 ## File Naming
 
-- Single export: `telor-frame.png`
+- Single export: `glint-frame.png`
 - Batch export: `screen_1.png`, `screen_2.png`, ... (inside ZIP)
-- telor_capture output: `{screen}_{device}.png` (e.g. `home_pixel7.png`)
+- glint_capture output: `{screen}_{device}.png` (e.g. `home_pixel7.png`)
 
 ## Session Export
 
-Telor Web generates `session.json` alongside exports for Telor View preview via QR code.
+Glint Web generates `session.json` alongside exports for Glint View preview via QR code.

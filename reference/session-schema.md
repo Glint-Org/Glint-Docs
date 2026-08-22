@@ -1,6 +1,6 @@
 # Session JSON Schema
 
-Used to transfer screenshot sessions between Telor-Capture / Bridge → Web → View.
+Used to transfer screenshot sessions between Glint-Capture / Bridge → Web → View.
 
 ## Format
 
@@ -31,6 +31,6 @@ Used to transfer screenshot sessions between Telor-Capture / Bridge → Web → 
 
 ## Transport
 
-- **Telor-Capture → Web:** Folder drag (session.json + PNGs in same directory)
+- **Glint-Capture → Web:** Folder drag (session.json + PNGs in same directory)
 - **Bridge → Web:** WebSocket message with session payload, or local `output/session.json`
 - **Web → View:** QR code (encoded JSON), clipboard paste, or file drop

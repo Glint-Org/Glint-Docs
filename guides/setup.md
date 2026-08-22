@@ -5,9 +5,9 @@
 | Tool | Version | For |
 |------|---------|-----|
 | [FVM](https://fvm.app) | Latest | Flutter version management |
-| Flutter | **3.44.1** (via FVM) | Telor View, Telor Capture |
-| Python | 3.10+ | Telor Bridge |
-| Node.js | 18+ | Telor Web |
+| Flutter | **3.44.1** (via FVM) | Glint View, Glint Capture |
+| Python | 3.10+ | Glint Bridge |
+| Node.js | 18+ | Glint Web |
 | ADB | Latest | Android device connection (Bridge) |
 
 ## FVM Setup (Flutter projects)
@@ -18,40 +18,40 @@ All Flutter apps and packages use **FVM 3.44.1**:
 # Install FVM (once)
 dart pub global activate fvm
 
-# Telor View
-cd Telor-View
+# Glint View
+cd Glint-View
 fvm use 3.44.1
 fvm flutter pub get
 
-# Telor Capture
-cd Telor-Capture
+# Glint Capture
+cd Glint-Capture
 fvm use 3.44.1
 fvm flutter pub get
 
 # Example app
-cd Telor-Capture/example
+cd Glint-Capture/example
 fvm use 3.44.1
 fvm flutter pub get
 ```
 
 Android builds use **Gradle 8.14**, **targetSDK 36**, and **16KB page alignment** for modern device compatibility.
 
-## Telor Capture (Flutter — no device needed)
+## Glint Capture (Flutter — no device needed)
 
 ```bash
-cd Telor-Capture/example
+cd Glint-Capture/example
 fvm flutter pub get
 
 # Run screenshot rules
-fvm dart run telor_capture --app ExampleApp --output build/telor_screenshots
+fvm dart run glint_capture --app ExampleApp --output build/glint_screenshots
 
-# Output: build/telor_screenshots/session.json + PNGs
+# Output: build/glint_screenshots/session.json + PNGs
 ```
 
-## Telor Bridge (Android device capture)
+## Glint Bridge (Android device capture)
 
 ```bash
-cd Telor-Bridge
+cd Glint-Bridge
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
@@ -65,10 +65,10 @@ python -m bridge.main server   # WebSocket on :7700
 
 Output: `output/session.json` + PNGs
 
-## Telor Web
+## Glint Web
 
 ```bash
-cd Telor-Web
+cd Glint-Web
 npm install
 npm run dev
 # Opens at http://localhost:5173
@@ -77,28 +77,28 @@ npm run dev
 1. Import session folder or upload screenshots
 2. Pick a viral template
 3. Batch export ZIP
-4. Scan QR with Telor View
+4. Scan QR with Glint View
 
-## Telor View
+## Glint View
 
 ```bash
-cd Telor-View
+cd Glint-View
 fvm flutter pub get
 fvm flutter run
 ```
 
-- Scan QR from Telor Web export
+- Scan QR from Glint Web export
 - Or paste session JSON manually
 
 ## Verify End-to-End
 
-1. `cd Telor-Capture/example && fvm dart run telor_capture`
-2. `cd Telor-Web && npm run dev` → import `build/telor_screenshots/`
+1. `cd Glint-Capture/example && fvm dart run glint_capture`
+2. `cd Glint-Web && npm run dev` → import `build/glint_screenshots/`
 3. Pick template → Export ZIP
-4. `cd Telor-View && fvm flutter run` → scan QR or paste JSON
+4. `cd Glint-View && fvm flutter run` → scan QR or paste JSON
 
 ## Optional: Bridge + Web live capture
 
 1. `python -m bridge.main server`
-2. `npm run dev` in Telor-Web
+2. `npm run dev` in Glint-Web
 3. Editor shows "Bridge Connected" → Capture from Device

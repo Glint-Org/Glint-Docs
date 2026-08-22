@@ -2,42 +2,42 @@
 
 ## Full Pipeline (End to End)
 
-### Path A: telor_capture (Flutter, no device)
+### Path A: glint_capture (Flutter, no device)
 
 ```
-Flutter app + screenshot rules → telor_capture CLI → build/telor_screenshots/
+Flutter app + screenshot rules → glint_capture CLI → build/glint_screenshots/
 ```
 
-1. Add `telor_capture` to dev_dependencies
-2. Create `test/telor_screenshots_test.dart` with `telorScreenshots()` rules
-3. Run: `dart run telor_capture --app MyApp --output build/telor_screenshots`
+1. Add `glint_capture` to dev_dependencies
+2. Create `test/glint_screenshots_test.dart` with `glintScreenshots()` rules
+3. Run: `dart run glint_capture --app MyApp --output build/glint_screenshots`
 4. Output: PNGs + `session.json`
 
-### Path B: Telor Bridge (Android device)
+### Path B: Glint Bridge (Android device)
 
 ```
-Android Device → USB/WiFi → Telor Bridge → output/ + session.json
+Android Device → USB/WiFi → Glint Bridge → output/ + session.json
 ```
 
 - Connect device via USB debugging or WiFi ADB
 - Run Bridge in server mode or use `capture`/`batch`/`crawl` CLI commands
-- Output goes to `Telor-Bridge/output/` with auto-generated `session.json`
+- Output goes to `Glint-Bridge/output/` with auto-generated `session.json`
 
-### Step 2: Design (Telor Web)
+### Step 2: Design (Glint Web)
 
 ```
-session.json + PNGs → Telor Web → viral template → batch PNG/ZIP export
+session.json + PNGs → Glint Web → viral template → batch PNG/ZIP export
 ```
 
-- Import session folder (drag `build/telor_screenshots/` or Bridge `output/`)
+- Import session folder (drag `build/glint_screenshots/` or Bridge `output/`)
 - Pick a viral template from the gallery
 - All screenshots auto-composed with device frames and backgrounds
 - Export batch ZIP (Play Store 1080×1920 or App Store 1290×2796)
 
-### Step 3: Preview (Telor View)
+### Step 3: Preview (Glint View)
 
 ```
-session.json → QR code → Telor View → Play/App Store preview
+session.json → QR code → Glint View → Play/App Store preview
 ```
 
 - Export session generates JSON with screenshot URLs
@@ -47,7 +47,7 @@ session.json → QR code → Telor View → Play/App Store preview
 
 ## Development Tips
 
-- **Telor-Capture:** Run `flutter test test/telor_screenshots_test.dart --update-goldens` for quick iteration
+- **Glint-Capture:** Run `flutter test test/glint_screenshots_test.dart --update-goldens` for quick iteration
 - **Bridge:** Test with `python -m bridge.main devices` to verify ADB connection first
 - **Web:** Hot module reload works — templates and frames update instantly
 - **View:** Use `flutter run --debug` for quick iteration on preview layout
@@ -57,9 +57,9 @@ session.json → QR code → Telor View → Play/App Store preview
 
 | Area | Typical Change |
 |------|---------------|
-| New template | Add JSON to `Telor-Web/public/templates/` and register in `templateLoader.js` |
-| New device preset | Add to `Telor-Capture/lib/src/devices.dart` |
+| New template | Add JSON to `Glint-Web/public/templates/` and register in `templateLoader.js` |
+| New device preset | Add to `Glint-Capture/lib/src/devices.dart` |
 | New export format | Extend `exportHelper.js` EXPORT_PRESETS |
 | New frame SVG | Add SVG to `public/frames/` and update `FrameSelector.jsx` |
-| New preview layout | Add widget in `Telor-View/lib/widgets/` |
-| Bridge action | Add handler in `websocket_server.py` + client method in `useTelorBridge.js` |
+| New preview layout | Add widget in `Glint-View/lib/widgets/` |
+| Bridge action | Add handler in `websocket_server.py` + client method in `useGLINTBridge.js` |
