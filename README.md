@@ -1,38 +1,42 @@
 # Glint Docs
 
-Reference documentation for the Glint screenshot automation ecosystem.
+Public reference for the Glint ecosystem. **These markdown files are the docs** — read them in the repo or on GitHub. No extra site required.
 
-## Repos
+Glint is simple to use, stable for shipping store assets, and usable **by hand**, **in automation**, or **with an AI agent**.
 
-| Repo | Purpose |
-|------|---------|
-| **Glint-Capture** | Flutter package — device-free golden screenshot capture |
-| **Glint-Bridge** | Python ADB capture engine for Android devices |
-| **Glint-Web** | React editor with viral templates and batch export |
-| **Glint-View** | Flutter Play/App Store preview app |
+## Start here
 
-## Guides
+- [How to use Glint](guides/using-glint.md) — manual, automation, and AI
+- [Setup](guides/setup.md) — install Capture, Bridge, Web, View
+- [Workflow](guides/workflow.md) — capture → design → export → preview
+- [AI workflow](guides/ai-workflow.md) — Cursor / Copilot / agents
 
-- [Setup](guides/setup.md) — install all components
-- [Workflow](guides/workflow.md) — end-to-end capture → design → preview
+## Products
+
+| Product | Purpose |
+|---------|---------|
+| **Glint-Capture** | Flutter package — device-free capture + `session.json` |
+| **Glint-Bridge** | Python ADB capture for Android |
+| **Glint-Web** | Editor — graphic templates, canvas, ZIP export |
+| **Glint-View** | On-device Play / App Store preview |
 
 ## Reference
 
-- [Architecture](reference/architecture.md) — system overview and data flow
-- [Session Schema](reference/session-schema.md) — JSON format for cross-tool handoff
-- [Export Spec](reference/export-spec.md) — store dimension requirements
-- [WebSocket Protocol](reference/websocket-protocol.md) — Bridge API
-- [Frames](reference/frames.md) — device frame SVG guide
-- [Project Structure](reference/project-structure.md) — repo layout
+- [Architecture](reference/architecture.md)
+- [Session schema](reference/session-schema.md)
+- [Export spec](reference/export-spec.md)
+- [WebSocket protocol](reference/websocket-protocol.md)
+- [Frames](reference/frames.md)
+- [Project structure](reference/project-structure.md)
 
-## Quick Workflow
-
-```
-glint_capture → session.json + PNGs → Glint Web templates → ZIP export → Glint View QR
-```
-
-Or for non-Flutter apps:
+## Pipeline
 
 ```
-Glint Bridge (ADB) → output/session.json → Glint Web → Glint View
+glint capture  →  session.json + PNGs  →  Glint Web  →  ZIP  →  Glint View (optional)
+```
+
+Non-Flutter Android:
+
+```
+Glint Bridge  →  output/session.json  →  Glint Web  →  Glint View
 ```
