@@ -40,10 +40,10 @@
 
 ## Data Flow
 
-1. **Capture** — `glint_capture` generates PNGs via golden tests, OR Bridge captures via ADB
-2. **Session** — Both paths emit `session.json` with ordered screenshot list
-3. **Design** — Web imports session, applies viral template to all screens, batch exports
-4. **Preview** — View loads session JSON (QR scan or paste), renders store-style preview
+1. **Capture** - `glint_capture` generates PNGs via golden tests, OR Bridge captures via ADB
+2. **Session** - Both paths emit `session.json` with ordered screenshot list
+3. **Design** - Web imports session, applies a curated store template, batch exports
+4. **Preview** - View loads session JSON (QR scan or paste), renders store-style preview
 
 ## Monetization
 
@@ -51,5 +51,5 @@
 |-------|--------|
 | Glint Web | Google AdSense (banner + interstitial) |
 | Glint View | Google AdMob (AppOpen ad on launch) |
-| Glint Bridge | OSS — drives ecosystem traffic |
-| Glint Capture | OSS pub.dev package — drives ecosystem traffic |
+| Glint Bridge | OSS - drives ecosystem traffic |
+| Glint Capture | OSS pub.dev package - drives ecosystem traffic |

@@ -2,21 +2,22 @@
 
 ```
 Glint-Org/
-├── plan.md                          # Master plan & strategy
+├── glint-master-plan.md             # Master plan & strategy
 ├── Glint-Capture/                   # Public - Flutter screenshot package
 │   ├── lib/
 │   │   ├── glint_capture.dart       # Public API
 │   │   └── src/
 │   │       ├── devices.dart         # Device presets
 │   │       ├── rules.dart           # GLINTRule, templates
-│   │       ├── runner.dart          # Alchemist orchestration
+│   │       ├── runner.dart          # Capture orchestration + session.json
 │   │       ├── session.dart         # session.json writer
 │   │       └── pump.dart            # Pump helpers
-│   ├── bin/glint_capture.dart       # CLI entry
+│   ├── bin/glint.dart               # CLI: init / capture
 │   ├── example/                     # Sample app + rules
 │   └── test/
 │
 ├── Glint-Bridge/                    # Public - Capture engine (Python)
+│   ├── glint.py                     # Simple CLI entry
 │   ├── bridge/
 │   │   ├── main.py                  # CLI entry point
 │   │   ├── adb_usb.py              # USB ADB device management
@@ -24,65 +25,50 @@ Glint-Org/
 │   │   ├── capture.py              # Screenshot capture engine
 │   │   ├── session.py              # session.json generation
 │   │   ├── crawler.py              # Appium auto-crawl (optional)
-│   │   └── websocket_server.py     # WebSocket server on :7700
+│   │   └── websocket_server.py     # Localhost :7700 + pairing token
 │   ├── scripts/
-│   │   ├── install.sh              # Linux/Mac setup
-│   │   └── run.bat                 # Windows launcher
 │   ├── output/                     # Screenshot output directory
 │   └── requirements.txt
 │
-├── Glint-Web/                       # Public - Design editor (React)
+├── Glint-Web/                       # Main product - Design editor (React)
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── UploadZone.jsx      # Drag & drop upload
-│   │   │   ├── SessionImporter.jsx # Import session.json + PNGs
-│   │   │   ├── TemplateGallery.jsx # Viral template picker
-│   │   │   ├── BatchProcessor.jsx  # Batch template export
-│   │   │   ├── ScreenshotReorder.jsx
-│   │   │   ├── QRExporter.jsx      # QR for Glint View
-│   │   │   ├── FrameEditor.jsx     # Canvas wrapper
-│   │   │   ├── ThemeSelector.jsx   # Background theme picker
-│   │   │   ├── ExportManager.jsx   # PNG/ZIP export
-│   │   │   └── AdSlot.jsx          # AdSense placeholder
+│   │   │   ├── UploadZone.jsx
+│   │   │   ├── SessionImporter.jsx
+│   │   │   ├── TemplateGallery.jsx # Curated store template picker
+│   │   │   ├── BatchProcessor.jsx
+│   │   │   ├── FrameEditor.jsx
+│   │   │   ├── ThemeSelector.jsx   # Swatches + color picker
+│   │   │   ├── FontPicker.jsx
+│   │   │   ├── ExportManager.jsx
+│   │   │   └── …
 │   │   ├── hooks/
-│   │   │   └── useGLINTBridge.js   # WebSocket client hook
+│   │   │   └── useGlintBridge.js
 │   │   ├── utils/
-│   │   │   ├── canvasEngine.js     # Fabric.js operations
-│   │   │   ├── templateEngine.js   # Template rendering
-│   │   │   ├── templateLoader.js   # Template JSON loader
-│   │   │   └── exportHelper.js     # Download helpers
+│   │   │   ├── canvasEngine.js     # Fabric.js + framed screenshots
+│   │   │   ├── templateEngine.js
+│   │   │   ├── frameMeta.js        # Device frame insets
+│   │   │   ├── templateLoader.js
+│   │   │   └── exportHelper.js
 │   │   ├── pages/
-│   │   │   ├── Home.jsx            # Upload + session import
-│   │   │   └── Editor.jsx          # Template editor page
-│   │   ├── main.jsx                # App entry + routing
-│   │   └── index.css               # Tailwind import
+│   │   │   ├── Home.jsx
+│   │   │   └── Editor.jsx          # Figma-like canvas editor
+│   │   └── …
 │   ├── public/
-│   │   ├── frames/                 # Device frame SVGs
-│   │   └── templates/              # Viral template JSON definitions
+│   │   ├── frames/                 # Device bezel SVGs (screen punched out)
+│   │   └── templates/              # 7 curated Play/iOS/iPad templates
 │   └── vite.config.js
 │
-├── Glint-View/                      # Private - Preview app (Flutter)
-│   ├── lib/
-│   │   ├── main.dart               # App entry + routes
-│   │   ├── screens/
-│   │   │   ├── home.dart           # Landing screen
-│   │   │   ├── scanner.dart        # QR scanner
-│   │   │   └── preview.dart        # Play/App Store preview
-│   │   ├── widgets/
-│   │   │   ├── listing_header.dart # App icon + name + rating
-│   │   │   └── screenshot_carousel.dart
-│   │   └── services/
-│   │       └── session_loader.dart
-│   └── pubspec.yaml
+├── Glint-View/                      # Preview app (Flutter)
+│   └── lib/ …
 │
-└── Glint-Docs/                      # Local only - Reference docs
-    ├── README.md
+└── Glint-Docs/                      # Reference docs
     ├── guides/
     │   ├── setup.md
     │   └── workflow.md
     └── reference/
         ├── architecture.md
-        ├── websocket-protocol.md
+        ├── websocket-protocol.md   # Includes pairing
         ├── session-schema.md
         ├── export-spec.md
         ├── frames.md
