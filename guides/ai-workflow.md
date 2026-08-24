@@ -2,7 +2,7 @@
 
 Developers can use Glint by hand, in CI, or with Cursor / Copilot / any agentic IDE. Rules and skills in this repo tell the agent what to do. The agent installs Capture, captures **real** UI, then uses Glint Web (with the same templates) to polish and export.
 
-**Reference:** all of [Glint-Docs](../README.md) is markdown — read it here or on GitHub.
+**Reference:** all of [Glint-Docs](../README.md) is markdown - read it here or on GitHub.
 
 ## What AI can do today
 

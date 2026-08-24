@@ -1,23 +1,23 @@
 # Glint Docs
 
-Public reference for the Glint ecosystem. **These markdown files are the docs** — read them in the repo or on GitHub. No extra site required.
+Public reference for the Glint ecosystem. **These markdown files are the docs** - read them in the repo or on GitHub. No extra site required.
 
 Glint is simple to use, stable for shipping store assets, and usable **by hand**, **in automation**, or **with an AI agent**.
 
 ## Start here
 
-- [How to use Glint](guides/using-glint.md) — manual, automation, and AI
-- [Setup](guides/setup.md) — install Capture, Bridge, Web, View
-- [Workflow](guides/workflow.md) — capture → design → export → preview
-- [AI workflow](guides/ai-workflow.md) — Cursor / Copilot / agents
+- [How to use Glint](guides/using-glint.md) - manual, automation, and AI
+- [Setup](guides/setup.md) - install Capture, Bridge, Web, View
+- [Workflow](guides/workflow.md) - capture → design → export → preview
+- [AI workflow](guides/ai-workflow.md) - Cursor / Copilot / agents
 
 ## Products
 
 | Product | Purpose |
 |---------|---------|
-| **Glint-Capture** | Flutter package — device-free capture + `session.json` |
+| **Glint-Capture** | Flutter package - device-free capture + `session.json` |
 | **Glint-Bridge** | Python ADB capture for Android |
-| **Glint-Web** | Editor — graphic templates, canvas, ZIP export |
+| **Glint-Web** | Editor - graphic templates, canvas, ZIP export |
 | **Glint-View** | On-device Play / App Store preview |
 
 ## Reference

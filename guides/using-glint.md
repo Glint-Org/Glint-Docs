@@ -68,7 +68,7 @@ Agents **must not** generate fake UI. Apple and Google reject listings that do n
 
 ## Docs
 
-[Glint-Docs](../README.md) is the reference. Read it in the repo or on GitHub — every guide and schema is a markdown file.
+[Glint-Docs](../README.md) is the reference. Read it in the repo or on GitHub - every guide and schema is a markdown file.
 
 - [Setup](setup.md)
 - [Workflow](workflow.md)
