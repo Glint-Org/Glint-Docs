@@ -2,35 +2,43 @@
 
 SVG-based device frames are stored in `Glint-Web/public/frames/`.
 
+Screen insets for compositing live in `Glint-Web/src/utils/frameMeta.js`.
+
 ## Supported Devices
 
 | Frame | File | Notes |
 |-------|------|-------|
 | Pixel 7 | `pixel7.svg` | Play Store default |
 | Samsung Galaxy S23 | `galaxy-s23.svg` | Play Store |
+| Samsung M12 | `samsung-m12.svg` | Play Store |
 | Generic Android | `generic.svg` | Fallback |
 | iPhone 15 | `iphone15.svg` | App Store |
+| iPhone 14 Pro | `iphone14-pro.svg` | App Store |
 | iPad Pro | `ipad-pro.svg` | App Store tablet |
+| iPad 10 | `ipad-10.svg` | App Store tablet |
 
 ## Adding a Frame
 
-1. Export device frame as SVG (from Figma, Sketch, or similar)
-2. Remove background — keep only the bezel/cutout
-3. Set viewBox to match 1080×1920 canvas coordinates
-4. Place in `public/frames/`
-5. Register in `FrameSelector.jsx` and template JSON files
+1. Export device bezel as SVG at the device’s logical aspect (not full store canvas)
+2. Punch out the screen with `fill-rule="evenodd"` so the display area is transparent
+3. Place in `public/frames/`
+4. Add insets (`top/right/bottom/left/rx/width/height`) in `frameMeta.js`
+5. Register in `FrameSelector.jsx`
 
 ## Frame Requirements
 
-- ViewBox should match the screenshot area
-- Inner transparent region = visible screenshot area
-- Outer bezel = any color (usually black or device color)
+- ViewBox matches the physical device aspect (e.g. 390×844 for iPhone)
+- Bezel only - screen region must be transparent (evenodd hole)
+- Outer bezel = device color
+- Optional drop shadow via SVG filter
 - No external dependencies or embedded raster images
 
 ## Template Usage
 
-Templates reference frames by ID in their JSON layer definitions:
+Prefer the `device` layer - it composites the screenshot **inside** the frame:
 
 ```json
-{ "type": "device-frame", "frame": "iphone15", "position": "center", "scale": 0.75 }
+{ "type": "device", "frame": "iphone15", "slot": 0, "scale": 0.58, "position": "center", "marginTop": 480 }
 ```
+
+Legacy separate layers (`screenshot` + `device-frame`) still work but do not clip the shot into the bezel.

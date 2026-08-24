@@ -31,6 +31,14 @@ Used to transfer screenshot sessions between Glint-Capture / Bridge → Web → 
 
 ## Transport
 
-- **Glint-Capture → Web:** Folder drag (session.json + PNGs in same directory)
-- **Bridge → Web:** WebSocket message with session payload, or local `output/session.json`
+- **Glint-Capture → Web:** Folder import (`session.json` + PNGs). Capture writes `session.json` automatically after a successful `glint capture` / `flutter test` run (via runner `tearDownAll` and CLI refresh). Screen paths are relative, e.g. `android/pixel7/home.png`.
+- **Bridge → Web:** WebSocket (after pairing) with session payload, or local `output/session.json`
 - **Web → View:** QR code (encoded JSON), clipboard paste, or file drop
+
+## Producers
+
+| Producer | Writes `session.json`? | Notes |
+|----------|------------------------|-------|
+| Glint-Capture | Yes | After all screenshots; `screens` list nested paths |
+| Glint-Bridge | Yes | On capture / batch / crawl / server |
+| Glint-Web | Optional | QR export embeds session metadata for View |
