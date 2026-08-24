@@ -1,8 +1,35 @@
 # Bridge WebSocket Protocol
 
-**Endpoint:** `ws://localhost:7700`
+**Endpoint:** `ws://127.0.0.1:7700` (localhost only)
+
+The Bridge server binds to **loopback** and requires a **pairing token** before any capture actions are accepted.
+
+## Pairing (required first message)
+
+When you start the server (`python glint.py start` or `python -m bridge.main server`), the console prints a short hex token.
+
+**Client → Server (first message):**
+```json
+{ "action": "pair", "token": "<token-from-console>" }
+```
+
+**Success:**
+```json
+{ "type": "paired", "success": true }
+```
+
+**Failure:** connection closed with code `1008` (Unauthorized) and optional error payload:
+```json
+{ "type": "error", "message": "Invalid pairing token. Request denied." }
+```
+
+Glint-Web stores the token in `localStorage` (`glint_bridge_token`) and re-sends it on reconnect.
+
+---
 
 ## Client → Server (Actions)
+
+All actions below require a successful pair.
 
 ### `ping`
 ```json
@@ -84,7 +111,8 @@ Response: `{ "type": "connect_result", "success": true }`
 
 | WebSocket action | CLI command |
 |-----------------|-------------|
-| capture_single | `python -m bridge.main capture --app "My App"` |
-| capture_batch | `python -m bridge.main batch --count 5` |
-| crawl | `python -m bridge.main crawl --package com.example.app` |
-| server | `python -m bridge.main server` |
+| (start + token) | `python glint.py start` |
+| capture_single | `python glint.py capture` |
+| capture_batch | `python glint.py batch 5` |
+| crawl | `python glint.py crawl com.example.app` |
+| list_devices | `python glint.py devices` |
