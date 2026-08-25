@@ -41,8 +41,9 @@ Ask your agent: *"Set up Glint Capture and capture store screenshots for this ap
 3. Create rules for home, features, settings screens
 4. Run `glint capture`
 5. Instruct developer to open Glint Web → import `glint_screenshots/` folder
-6. Recommend a graphic template (`play-hero`, `play-pop`, `ios-clean`)
-7. Recolor art to brand colors, set tagline, export ZIP at 1080×1920
+6. Recommend a template pack (Play / App Store / iPad) in Glint Web
+7. Recolor art to brand colors, set tagline, export ZIP at store size
+8. Optional: Copy for Glint View → paste on device for listing QA
 
 ## Phase 2 (future)
 

@@ -12,82 +12,57 @@
 
 ## FVM Setup (Flutter projects)
 
-All Flutter apps and packages use **FVM 3.44.1**:
-
 ```bash
-# Install FVM (once)
 dart pub global activate fvm
 
-# Glint View
-cd Glint-View
-fvm use 3.44.1
-fvm flutter pub get
-
-# Glint Capture
-cd Glint-Capture
-fvm use 3.44.1
-fvm flutter pub get
-
-# Example app
-cd Glint-Capture/example
-fvm use 3.44.1
-fvm flutter pub get
+cd Glint-View && fvm use 3.44.1 && fvm flutter pub get
+cd Glint-Capture && fvm use 3.44.1 && fvm flutter pub get
+cd Glint-Capture/example && fvm use 3.44.1 && fvm flutter pub get
 ```
 
-Android builds use **Gradle 8.14**, **targetSDK 36**, and **16KB page alignment** for modern device compatibility.
-
-## Glint Capture (Flutter - no device needed)
+## Glint Capture
 
 ```bash
-cd Glint-Capture/example
-fvm flutter pub get
+# In your Flutter app pubspec:
+#   glint_capture:
+#     path: ../Glint-Capture   # or git URL
 
-# Initialize (from an app that depends on glint_capture)
-glint init          # creates glint.yaml + test/glint_screenshots_test.dart
-glint capture       # runs flutter test + writes PNGs and session.json
-
-# Or run the screens test directly
-fvm flutter test test/glint_screenshots_test.dart
+dart pub global activate --source path /path/to/Glint-Capture
+glint init
+glint capture
 ```
 
-Output: `glint_screenshots/` (or path from `glint.yaml`) containing nested device PNGs **and** `session.json` (schema v1).
+Output: `glint_screenshots/` (or `glint.yaml` path) with nested PNGs **and** `session.json`.
 
-## Glint Bridge (Android device capture)
+## Glint Bridge
 
 ```bash
 cd Glint-Bridge
-python -m venv venv
-source venv/bin/activate   # Windows: venv\Scripts\activate
+python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
 
 python glint.py check
 python glint.py devices
-python glint.py capture
-python glint.py batch 5
-python glint.py crawl com.example.app   # requires Appium
-python glint.py start                   # WebSocket on 127.0.0.1:7700 + pairing token
+python glint.py capture          # or batch / start
+# crawl needs Appium — optional; see Bridge README
+python glint.py start            # ws://127.0.0.1:7700 + pairing token
 ```
 
-Output: `output/session.json` + PNGs
-
-Note the **pairing token** printed by `start`. Enter it in Glint-Web before live capture.
+Live Web captures include **data URLs** for browser display. Server is **loopback-only**.
 
 ## Glint Web
 
 ```bash
-cd Glint-Web
-npm install
-npm run dev
-# Opens at http://localhost:5173
+cd Glint-Web && npm install && npm run dev
+# http://localhost:5173
 ```
 
 1. Import session folder or upload screenshots
-2. Pick a curated store template
-3. Customize on the canvas (text, background, frames)
-4. Batch export ZIP
-5. Optional: scan QR with Glint View
+2. Pick a template pack → frames board
+3. Edit → Export ZIP
+4. Preview → **Copy for Glint View** (full screens for paste)
 
-## Glint View
+## Glint View (preview only)
 
 ```bash
 cd Glint-View
@@ -95,19 +70,16 @@ fvm flutter pub get
 fvm flutter run
 ```
 
-- Scan QR from Glint Web export
-- Or paste session JSON manually
+- **Paste Session JSON** from Web (recommended for screenshots)
+- QR is useful for metadata; image payloads use paste
 
 ## Verify End-to-End
 
-1. `cd Glint-Capture/example && glint capture` (or `fvm flutter test …`)
-2. Confirm `session.json` exists next to the PNGs
-3. `cd Glint-Web && npm run dev` → import the output folder
-4. Pick template → Export ZIP
-5. `cd Glint-View && fvm flutter run` → scan QR or paste JSON
+1. Capture (example or your app) → confirm `session.json`
+2. Web → import → template → Export ZIP
+3. Copy for Glint View → View → Paste → store listing preview
 
 ## Optional: Bridge + Web live capture
 
-1. `python glint.py start` - copy the pairing token
-2. `npm run dev` in Glint-Web
-3. Enter token in the editor → Pair → Capture from Device
+1. `python glint.py start` — copy pairing token
+2. Web → pair → Capture from Device

@@ -8,11 +8,13 @@
 Flutter app + screenshot rules → glint capture → glint_screenshots/ (+ session.json)
 ```
 
-1. Add `glint_capture` to `dev_dependencies`
+1. Add `glint_capture` to `dev_dependencies` (path or git; see Capture README)
 2. Run `glint init` (or create `test/glint_screenshots_test.dart` with `glintScreenshots()` rules)
 3. Edit `glint.yaml` - app name, tagline, store, devices
 4. Run: `glint capture` (or `flutter test test/glint_screenshots_test.dart`)
-5. Output: PNGs under `android|ios/<device>/` **and** root `session.json`
+5. Output: PNGs under `android|ios/<device>/` **and** root `session.json` (primary device paths for Web frames)
+
+**Tip:** Soft launch with one device (e.g. `pixel9`) so frames map 1:1 to your screen sequence.
 
 ### Path B: Glint Bridge (Android device)
 
@@ -24,42 +26,42 @@ Android Device → USB/WiFi → Glint Bridge → output/ + session.json
 - Run Bridge in server mode (`python glint.py start`) or use `capture` / `batch` / `crawl`
 - Output goes to `Glint-Bridge/output/` with auto-generated `session.json`
 - Server is localhost-only and requires a pairing token before Web can connect
+- Live captures include `data_url` / `data_urls` so the browser can display PNGs
 
 ### Step 2: Design (Glint Web)
 
 ```
-session.json + PNGs → Glint Web → curated template → batch PNG/ZIP export
+session.json + PNGs → Glint Web → template pack → frames board → ZIP
 ```
 
 - Import session folder (drag Capture output or Bridge `output/`)
-- Pick a graphic Play / App Store / iPad template (blobs, waves, rings - editable)
-- Edit on the canvas: recolor graphics, rewrite headlines, adjust device frames
-- Export batch ZIP (Play Store 1080×1920 or App Store 1290×2796 / iPad 2048×2732)
+- Pick a Play / App Store / iPad **template pack** (loads 1–10 frames)
+- Edit on the **frames board**: headlines, colors, device screenshots, layers
+- Export ZIP (Play 1080×1920, App Store phone, or iPad sizes)
 
-### Step 3: Preview (Glint View)
+### Step 3: Preview (Glint View) — preview only
 
 ```
-session.json → QR code → Glint View → Play/App Store preview
+Web Export → Preview frames → Copy for Glint View → paste in View
 ```
 
-- Export session generates JSON with screenshot filenames
-- View on device by scanning QR or pasting JSON
-- Swipe through carousel like real store listing
-- Validate design before publishing
+- Prefer **Copy for Glint View** after Preview/Export (includes full `data:` screens)
+- QR from Web carries **metadata only** (screenshots are too large for QR)
+- View shows Play / App Store style listing chrome — no frame editor
 
 ## Development Tips
 
-- **Glint-Capture:** Prefer `glint capture`; the runner writes `session.json` in `tearDownAll`, and the CLI refreshes it after the test run
-- **Bridge:** Test with `python glint.py devices` first; use `python glint.py start` for live Web pairing
-- **Web:** Hot module reload works - templates and frames update instantly
-- **View:** Use `flutter run --debug` for quick iteration on preview layout
-- **Cross-repo:** Keep Bridge WebSocket running while developing Web features; always pair with the token
+- **Glint-Capture:** Prefer `glint capture`; the runner writes `session.json` in `tearDownAll`
+- **Bridge:** `python glint.py devices` first; `python glint.py start` for live Web pairing
+- **Web:** Frames board (not an infinite canvas); templates live in `public/templates/`
+- **View:** Paste Session JSON for image-backed preview; FVM Flutter 3.44.1
+- **Cross-repo:** Keep Bridge WebSocket running while developing Web capture; always pair with the token
 
 ## Adding Features
 
 | Area | Typical Change |
 |------|---------------|
-| New template | Add JSON to `Glint-Web/public/templates/` and register in `templateLoader.js` |
+| New template pack | Add JSON to `Glint-Web/public/templates/` and register in `templateLoader.js` |
 | New device preset | Add to `Glint-Capture/lib/src/devices.dart` |
 | New export format | Extend `exportHelper.js` EXPORT_PRESETS |
 | New frame SVG | Add SVG to `public/frames/` + insets in `frameMeta.js` |
