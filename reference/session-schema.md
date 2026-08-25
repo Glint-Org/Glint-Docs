@@ -14,6 +14,7 @@ Used to transfer screenshot sessions between Glint-Capture / Bridge → Web → 
   ],
   "store": "play",
   "version": "1.0",
+  "locales": ["en-US"],
   "exportedAt": "2026-06-30T12:00:00.000Z"
 }
 ```
@@ -27,6 +28,7 @@ For Glint Web frames, Capture writes **one primary device** in `screens` (e.g. `
 | `tagline` | string | no | Short marketing tagline |
 | `screens` | string[] | yes | Ordered list of screenshot filenames or URLs |
 | `store` | string | no | Store target: `play`, `ios`, or `ios-tablet` (default: `play`) |
+| `locales` | string[] | no | BCP-47 tags for Fastlane folders (default `["en-US"]`) |
 | `version` | string | yes | Schema version |
 | `exportedAt` | string (ISO) | yes | Export timestamp |
 

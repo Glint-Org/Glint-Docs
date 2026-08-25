@@ -12,6 +12,26 @@
 | Play Store (phone) | 1080 × 1920 | 9:16 | ≤ 8 MB |
 | App Store (phone) | 1290 × 2796 | ~9:19.5 | ≤ 8 MB |
 | App Store (tablet) | 2048 × 2732 | 4:3 | ≤ 8 MB |
+| Play feature graphic | 1024 × 500 | ~2:1 | ≤ 8 MB |
+
+## File Naming
+
+### Flat (default)
+
+- Batch export: `screen_1.png`, `screen_2.png`, … (or `ios_screen_N` / `ipad_screen_N`)
+- ZIP name: `{AppName}.zip` or `glint.zip`
+
+### Fastlane layout (optional)
+
+```
+phoneScreenshots/en-US/screen_1.png
+phoneScreenshots/en-US/screen_2.png
+…
+```
+
+iPad uses `tabletScreenshots/{locale}/…`. Feature graphic uses `featureGraphic/{locale}/…`.
+
+Enable in Glint Web export panel (**ZIP layout → Fastlane**) or headless `--layout fastlane --locale en-US`.
 
 ## Play Store Requirements
 
@@ -21,7 +41,8 @@
 | Max dimension | 3840 px |
 | Aspect ratio | Between 2:1 and 1:2 |
 | File size | ≤ 8 MB per screenshot |
-| Recommended | 1080 × 1920 |
+| Recommended phone | 1080 × 1920 |
+| Feature graphic | 1024 × 500 |
 
 ## App Store Requirements
 
@@ -32,10 +53,8 @@
 | Format | PNG or JPEG |
 | File size | ≤ 8 MB per screenshot |
 
-## File Naming
+## Capture paths
 
-- Single export: `glint-frame.png`
-- Batch export: `screen_1.png`, `screen_2.png`, ... (inside ZIP)
 - glint_capture output: nested paths e.g. `android/pixel9/home.png`
 
 ## Session Export (Glint View)

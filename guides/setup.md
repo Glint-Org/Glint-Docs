@@ -1,5 +1,13 @@
 # Setup Guide
 
+## Quick start (soft launch)
+
+1. Add Capture (`ref: v0.1.0` git dep) → `glint init` → write real-screen rules → `glint capture` (**pixel9** only).  
+2. Open Glint Web (`npm run dev` or hosted URL) → Import folder → Blink / Warm Glow → Export ZIP.  
+3. Optional: Copy for Glint View → paste on device.
+
+Full walkthrough: [golden-path.md](golden-path.md). Verify: [smoke-checklist.md](smoke-checklist.md).
+
 ## Prerequisites
 
 | Tool | Version | For |

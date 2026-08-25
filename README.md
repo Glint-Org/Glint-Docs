@@ -6,10 +6,13 @@ Soft-launch path: **Capture / Bridge → Web (frames) → View (preview)**.
 
 ## Start here
 
+- [**Golden path**](guides/golden-path.md) - first ZIP in &lt; 15 minutes
+- [Smoke checklist](guides/smoke-checklist.md) - pre-release QA
 - [How to use Glint](guides/using-glint.md) - manual, automation, and AI
 - [Setup](guides/setup.md) - install Capture, Bridge, Web, View
 - [Workflow](guides/workflow.md) - capture → design → export → preview
-- [AI workflow](guides/ai-workflow.md) - Cursor / Copilot / agents
+- [AI workflow](guides/ai-workflow.md) - Cursor / Copilot / agents / MCP
+- [Store upload](guides/store-upload.md) - Play / ASC / Fastlane
 
 ## Products
 

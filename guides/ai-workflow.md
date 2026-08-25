@@ -45,11 +45,17 @@ Ask your agent: *"Set up Glint Capture and capture store screenshots for this ap
 7. Recolor art to brand colors, set tagline, export ZIP at store size
 8. Optional: Copy for Glint View → paste on device for listing QA
 
-## Phase 2 (future)
+## Phase 2 (agent automation — shipped scaffolding)
 
-- Glint SDK / headless Web export API for full agent automation
-- Template selection via config file
+- **Glint MCP** ([Glint-MCP](../../Glint-MCP/README.md)): `glint_init`, `glint_capture`, `glint_validate_session`, `glint_export`
+- **Headless export:** `Glint-Web` route `/export` + `npm run headless:export -- --session … --template blink-play --out out.zip`
+- **Fastlane ZIP layout:** Web export toggle or `--layout fastlane`
+- Template selection via CLI flags / MCP args
+
+## Phase 3 (future)
+
 - CI GitHub Action: capture → export → artifact upload
+- Direct Play / ASC upload helpers
 
 ## Related docs
 
