@@ -1,44 +1,32 @@
 # Device Frames
 
-SVG-based device frames are stored in `Glint-Web/public/frames/`.
+Curated set only — the frames developers use most for Play and App Store. No long device catalog.
 
-Screen insets for compositing live in `Glint-Web/src/utils/frameMeta.js`.
+SVGs: `Glint-Web/public/frames/`  
+Insets: `Glint-Web/src/utils/frameMeta.js`  
+Capture: `Glint-Capture/lib/src/devices.dart` (`GLINTDevices.premium`)
 
-## Supported Devices
+## Devices
 
-| Frame | File | Notes |
-|-------|------|-------|
-| Pixel 7 | `pixel7.svg` | Play Store default |
-| Samsung Galaxy S23 | `galaxy-s23.svg` | Play Store |
-| Samsung M12 | `samsung-m12.svg` | Play Store |
-| Generic Android | `generic.svg` | Fallback |
-| iPhone 15 | `iphone15.svg` | App Store |
-| iPhone 14 Pro | `iphone14-pro.svg` | App Store |
-| iPad Pro | `ipad-pro.svg` | App Store tablet |
-| iPad 10 | `ipad-10.svg` | App Store tablet |
+| Frame | Web file | Capture name | Logical size | Store |
+|-------|----------|--------------|--------------|-------|
+| Pixel 9 | `pixel9.svg` | `pixel9` | 412×915 @2.625 | Play default |
+| Galaxy S24 | `galaxy-s24.svg` | `galaxy_s24` | 360×780 @3 | Play |
+| iPhone 16 Pro Max | `iphone16-pro-max.svg` | `iphone16_pro_max` | 430×932 @3 | App Store 6.7" |
+| iPhone 16 Pro | `iphone16-pro.svg` | `iphone16_pro` | 393×852 @3 | App Store |
+| iPad Pro 13" | `ipad-pro-13.svg` | `ipad_pro_129` | 1024×1366 @2 | Tablet |
+| iPad Pro 11" | `ipad-pro.svg` | `ipad_pro_11` | 834×1194 @2 | Tablet |
 
-## Adding a Frame
+Web also allows **None** (rounded screenshot, no bezel). Custom SVG upload remains available in FramePicker.
 
-1. Export device bezel as SVG at the device’s logical aspect (not full store canvas)
-2. Punch out the screen with `fill-rule="evenodd"` so the display area is transparent
-3. Place in `public/frames/`
-4. Add insets (`top/right/bottom/left/rx/width/height`) in `frameMeta.js`
-5. Register in `FrameSelector.jsx`
+## Adding a frame (rare)
 
-## Frame Requirements
+1. SVG bezel with evenodd screen hole → `public/frames/`
+2. Insets in `frameMeta.js` + option in `FrameSelector.jsx`
+3. Matching `GLINTDevice` in Capture `devices.dart`
 
-- ViewBox matches the physical device aspect (e.g. 390×844 for iPhone)
-- Bezel only - screen region must be transparent (evenodd hole)
-- Outer bezel = device color
-- Optional drop shadow via SVG filter
-- No external dependencies or embedded raster images
-
-## Template Usage
-
-Prefer the `device` layer - it composites the screenshot **inside** the frame:
+## Template usage
 
 ```json
-{ "type": "device", "frame": "iphone15", "slot": 0, "scale": 0.58, "position": "center", "marginTop": 480 }
+{ "type": "device", "frame": "iphone16-pro-max", "slot": 0, "scale": 0.58, "position": "center" }
 ```
-
-Legacy separate layers (`screenshot` + `device-frame`) still work but do not clip the shot into the bezel.

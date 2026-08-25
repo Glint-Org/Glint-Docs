@@ -36,8 +36,13 @@
 
 - Single export: `glint-frame.png`
 - Batch export: `screen_1.png`, `screen_2.png`, ... (inside ZIP)
-- glint_capture output: `{screen}_{device}.png` (e.g. `home_pixel7.png`)
+- glint_capture output: nested paths e.g. `android/pixel9/home.png`
 
-## Session Export
+## Session Export (Glint View)
 
-Glint Web generates `session.json` alongside exports for Glint View preview via QR code.
+After Preview or ZIP export in Glint Web:
+
+1. **Copy for Glint View** — clipboard JSON with full `data:` screens (recommended)
+2. **QR** — compact app/tagline/store metadata only; use paste for images
+
+View is preview-only; it does not edit frames.

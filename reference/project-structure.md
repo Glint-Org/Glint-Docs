@@ -30,36 +30,28 @@ Glint-Org/
 │   ├── output/                     # Screenshot output directory
 │   └── requirements.txt
 │
-├── Glint-Web/                       # Main product - Design editor (React)
+├── Glint-Web/                       # Frames editor (React)
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── UploadZone.jsx
-│   │   │   ├── SessionImporter.jsx
-│   │   │   ├── TemplateGallery.jsx # Curated store template picker
-│   │   │   ├── BatchProcessor.jsx
-│   │   │   ├── FrameEditor.jsx
-│   │   │   ├── ThemeSelector.jsx   # Swatches + color picker
-│   │   │   ├── FontPicker.jsx
-│   │   │   ├── ExportManager.jsx
+│   │   │   ├── FrameBoard.jsx / FrameCanvas.jsx
+│   │   │   ├── FramesPanel.jsx / AssetsPanel.jsx / ExportPanel.jsx
+│   │   │   ├── TemplateGallery.jsx
+│   │   │   ├── QRExporter.jsx      # Copy for Glint View + QR metadata
+│   │   │   ├── SessionImporter.jsx # Folder / paste import
 │   │   │   └── …
 │   │   ├── hooks/
-│   │   │   └── useGlintBridge.js
-│   │   ├── utils/
-│   │   │   ├── canvasEngine.js     # Fabric.js + framed screenshots
-│   │   │   ├── templateEngine.js
-│   │   │   ├── frameMeta.js        # Device frame insets
-│   │   │   ├── templateLoader.js
-│   │   │   └── exportHelper.js
+│   │   │   ├── useFrames.js
+│   │   │   └── useGlintBridge.js   # prefers data_url(s)
 │   │   ├── pages/
 │   │   │   ├── Home.jsx
-│   │   │   └── Editor.jsx          # Figma-like canvas editor
+│   │   │   └── Editor.jsx          # Frames board editor
 │   │   └── …
 │   ├── public/
-│   │   ├── frames/                 # Device bezel SVGs (screen punched out)
-│   │   └── templates/              # 7 curated Play/iOS/iPad templates
+│   │   ├── frames/                 # Device bezel SVGs
+│   │   └── templates/              # Play / App Store / iPad packs
 │   └── vite.config.js
 │
-├── Glint-View/                      # Preview app (Flutter)
+├── Glint-View/                      # Store listing preview only (Flutter)
 │   └── lib/ …
 │
 └── Glint-Docs/                      # Reference docs

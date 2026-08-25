@@ -46,9 +46,12 @@ Response:
 {
   "type": "screenshot",
   "path": "output/screenshot_0001.png",
+  "data_url": "data:image/png;base64,...",
   "session": { "app": "Captured App", "screens": ["screenshot_0001.png"], "version": "1.0" }
 }
 ```
+
+`data_url` is required for Glint Web to display the shot in-browser. `path` remains for disk/CLI use.
 
 ### `capture_batch`
 ```json
@@ -59,12 +62,13 @@ Response:
 {
   "type": "batch_result",
   "paths": ["output/batch_0001.png", "..."],
+  "data_urls": ["data:image/png;base64,...", "..."],
   "session": { "app": "My App", "screens": ["batch_0001.png", "..."], "version": "1.0" }
 }
 ```
 
 ### `crawl`
-Auto-navigate app via Appium and capture sequential screenshots.
+Auto-navigate app via Appium and capture sequential screenshots (optional dependency).
 ```json
 { "action": "crawl", "package": "com.example.app", "max_screens": 20, "app": "My App" }
 ```
@@ -73,6 +77,7 @@ Response:
 {
   "type": "crawl_result",
   "paths": ["output/crawl_0001.png", "..."],
+  "data_urls": ["data:image/png;base64,...", "..."],
   "session": { "app": "My App", "screens": ["crawl_0001.png", "..."] }
 }
 ```

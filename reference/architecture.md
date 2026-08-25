@@ -2,31 +2,32 @@
 
 ```
          ┌──────────────────────────────┐
-         │   GLINT CAPTURE (Public)      │
+         │   GLINT CAPTURE               │
          │   Flutter package + CLI       │
-         │   Golden screenshot rules     │
+         │   Widget-test screenshots     │
          └────────────┬─────────────────┘
                       │ session.json + PNGs
                       ▼
          ┌──────────────────────────────┐
-         │   GLINT BRIDGE (Public)       │
-         │   ADB + Appium + crawler     │
-         │   Python CLI + WebSocket     │
+         │   GLINT BRIDGE                │
+         │   ADB (+ optional Appium)     │
+         │   CLI + ws://127.0.0.1:7700   │
+         │   pairing token + data_urls   │
          └────────────┬─────────────────┘
-                      │ ws://localhost:7700
+                      │
                       ▼
          ┌──────────────────────────────┐
-         │   GLINT WEB (Public)          │
+         │   GLINT WEB                   │
          │   React + Vite + Fabric.js   │
-         │   Templates + batch export   │
-         │   AdSense revenue layer      │
+         │   Frames board + templates   │
+         │   ZIP export + View clipboard │
          └────────────┬─────────────────┘
-                      │ QR / session JSON
+                      │ paste session (data: screens)
                       ▼
          ┌──────────────────────────────┐
-         │   GLINT VIEW (Private)        │
-         │   Flutter + AdMob            │
-         │   Play / App Store preview   │
+         │   GLINT VIEW                  │
+         │   Flutter store listing QA    │
+         │   Preview only (no editor)    │
          └──────────────────────────────┘
 ```
 
@@ -40,16 +41,14 @@
 
 ## Data Flow
 
-1. **Capture** - `glint_capture` generates PNGs via golden tests, OR Bridge captures via ADB
-2. **Session** - Both paths emit `session.json` with ordered screenshot list
-3. **Design** - Web imports session, applies a curated store template, batch exports
-4. **Preview** - View loads session JSON (QR scan or paste), renders store-style preview
+1. **Capture** - Capture package or Bridge produces ordered PNGs + `session.json`
+2. **Design** - Web imports session, loads a template pack onto the frames board, exports ZIP
+3. **Preview** - View pastes session JSON with `data:` or `http(s)` screens (QR = metadata only)
 
-## Monetization
+## Roles
 
-| Layer | Method |
-|-------|--------|
-| Glint Web | Google AdSense (banner + interstitial) |
-| Glint View | Google AdMob (AppOpen ad on launch) |
-| Glint Bridge | OSS - drives ecosystem traffic |
-| Glint Capture | OSS pub.dev package - drives ecosystem traffic |
+| Product | Owns |
+|---------|------|
+| Capture / Bridge | Real screenshots |
+| Web | Templates, frames, export |
+| View | On-device store listing preview |
