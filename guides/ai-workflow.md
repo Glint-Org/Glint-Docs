@@ -47,7 +47,8 @@ Ask your agent: *"Set up Glint Capture and capture store screenshots for this ap
 
 ## Phase 2 (agent automation — shipped scaffolding)
 
-- **Glint MCP** ([Glint-MCP](../../Glint-MCP/README.md)): `glint_init`, `glint_capture`, `glint_validate_session`, `glint_export`
+- **Glint MCP** ([Glint-MCP](../../Glint-MCP/README.md)): `glint_init`, `glint_capture`, `glint_validate_session`, `glint_export`, `glint_bridge_crawl`
+- **Bridge intelligent crawl:** user-owned API key (`GLINT_AI_API_KEY`) + `--ai` — navigates Android/web and keeps real store-worthy frames
 - **Headless export:** `Glint-Web` route `/export` + `npm run headless:export -- --session … --template blink-play --out out.zip`
 - **Fastlane ZIP layout:** Web export toggle or `--layout fastlane`
 - Template selection via CLI flags / MCP args

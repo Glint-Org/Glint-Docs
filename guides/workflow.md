@@ -24,6 +24,7 @@ Android Device → USB/WiFi → Glint Bridge → output/ + session.json
 
 - Connect device via USB debugging or WiFi ADB
 - Run Bridge in server mode (`python glint.py start`) or use `capture` / `batch` / `crawl`
+- **Intelligent crawl:** `export GLINT_AI_API_KEY=...` then `python glint.py crawl com.app --ai` (or `crawl-web URL --ai`). AI navigates and keeps store-worthy **real** screens only; keys stay on your machine.
 - Output goes to `Glint-Bridge/output/` with auto-generated `session.json`
 - Server is localhost-only and requires a pairing token before Web can connect
 - Live captures include `data_url` / `data_urls` so the browser can display PNGs

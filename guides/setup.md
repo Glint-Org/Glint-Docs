@@ -53,10 +53,12 @@ python glint.py check
 python glint.py devices
 python glint.py capture          # or batch / start
 # crawl needs Appium — optional; see Bridge README
+# intelligent crawl (your key): export GLINT_AI_API_KEY=... && python glint.py crawl com.app --ai
+# web: python glint.py crawl-web https://example.com --ai
 python glint.py start            # ws://127.0.0.1:7700 + pairing token
 ```
 
-Live Web captures include **data URLs** for browser display. Server is **loopback-only**.
+Live Web captures include **data URLs** for browser display. Server is **loopback-only**. AI keys stay on the Bridge machine (env) — never paste keys into the browser.
 
 ## Glint Web
 
