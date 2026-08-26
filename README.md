@@ -21,12 +21,13 @@ Soft-launch path: **Capture / Bridge → Web (frames) → View (preview)**.
 | **Glint-Capture** | Flutter package - device-free capture + `session.json` |
 | **Glint-Bridge** | Python ADB capture for Android (+ localhost WebSocket) |
 | **Glint-Web** | Frames editor - template packs, layers, ZIP, View handoff |
-| **Glint-View** | On-device Play / App Store listing preview (no editor) |
+| **Glint-View** | Store Room + listing preview; `.glintpack` round-trip |
 
 ## Reference
 
 - [Architecture](reference/architecture.md)
 - [Session schema](reference/session-schema.md)
+- [Project pack (.glintpack)](reference/project-pack.md)
 - [Export spec](reference/export-spec.md)
 - [WebSocket protocol](reference/websocket-protocol.md)
 - [Frames](reference/frames.md)
