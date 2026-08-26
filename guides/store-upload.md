@@ -4,14 +4,14 @@ Glint exports **PNG ZIP** files. Upload is still manual (or Fastlane) — soft l
 
 ## Google Play Console
 
-1. Export Play preset ZIP from Glint Web (`1080×1920`).
+1. Export Play phone preset ZIP from Glint Web (`1080×1920`, store `play/phone`).
 2. Play Console → Your app → Store presence → Main store listing → Phone screenshots.
 3. Upload PNGs in order (`screen_1` = first listing tile).
-4. Optional: Feature graphic `1024×500` (export preset **feature-graphic** when you have a dedicated artboard).
+4. Repeat per device slot as needed (7″ / 10″ tablet, TV, Wear, Chromebook) using the matching template.
 
 ## App Store Connect
 
-1. Export iOS or iPad preset ZIP.
+1. Export iPhone (`ios/iphone`) or iPad (`ios/ipad`) preset ZIP.
 2. App Store Connect → your version → App Preview and Screenshots.
 3. Drop PNGs into the correct device size well (6.7" / 12.9").
 

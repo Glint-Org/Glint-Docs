@@ -38,7 +38,7 @@ session.json + PNGs → Glint Web → template pack → frames board → ZIP
 ```
 
 - Import session folder (drag Capture output or Bridge `output/`)
-- Pick a Play / App Store / iPad **template pack** (loads 1–10 frames)
+- Pick a **platform → device** template pack (loads 1–10 frames)
 - Edit on the **frames board**: headlines, colors, device screenshots, layers
 - Export ZIP (Play 1080×1920, App Store phone, or iPad sizes)
 
