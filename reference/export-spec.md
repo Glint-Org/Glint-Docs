@@ -7,29 +7,38 @@
 
 ## Store Presets
 
-| Store | Resolution | Aspect | Max file size |
-|-------|-----------|--------|---------------|
-| Play Store (phone) | 1080 × 1920 | 9:16 | ≤ 8 MB |
-| App Store (phone) | 1290 × 2796 | ~9:19.5 | ≤ 8 MB |
-| App Store (tablet) | 2048 × 2732 | 4:3 | ≤ 8 MB |
-| Play feature graphic | 1024 × 500 | ~2:1 | ≤ 8 MB |
+Canonical key: `{platform}/{device}` (e.g. `play/phone`, `ios/ipad`).
+
+| Platform | Device | Key | Resolution |
+|----------|--------|-----|------------|
+| Play Store | Phone | `play/phone` | 1080 × 1920 |
+| Play Store | 7″ Tablet | `play/tablet-7` | 1200 × 1920 |
+| Play Store | 10″ Tablet | `play/tablet-10` | 1600 × 2560 |
+| Play Store | TV | `play/tv` | 1920 × 1080 |
+| Play Store | Wear OS | `play/wear` | 450 × 450 |
+| Play Store | Chromebook | `play/chromebook` | 1920 × 1080 |
+| App Store | iPhone | `ios/iphone` | 1290 × 2796 |
+| App Store | iPad | `ios/ipad` | 2048 × 2732 |
+
+Legacy aliases: `play` → `play/phone`, `ios` → `ios/iphone`, `ios-tablet` → `ios/ipad`.
 
 ## File Naming
 
 ### Flat (default)
 
-- Batch export: `screen_1.png`, `screen_2.png`, … (or `ios_screen_N` / `ipad_screen_N`)
+- Batch export: `screen_1.png`, `ios_screen_N`, `tv_screen_N`, …
 - ZIP name: `{AppName}.zip` or `glint.zip`
 
 ### Fastlane layout (optional)
 
 ```
 phoneScreenshots/en-US/screen_1.png
-phoneScreenshots/en-US/screen_2.png
-…
+sevenInchScreenshots/en-US/tablet7_screen_1.png
+tenInchScreenshots/en-US/tablet10_screen_1.png
+tvScreenshots/en-US/tv_screen_1.png
+wearOsScreenshots/en-US/wear_screen_1.png
+tabletScreenshots/en-US/ipad_screen_1.png
 ```
-
-iPad uses `tabletScreenshots/{locale}/…`. Feature graphic uses `featureGraphic/{locale}/…`.
 
 Enable in Glint Web export panel (**ZIP layout → Fastlane**) or headless `--layout fastlane --locale en-US`.
 
@@ -42,7 +51,6 @@ Enable in Glint Web export panel (**ZIP layout → Fastlane**) or headless `--la
 | Aspect ratio | Between 2:1 and 1:2 |
 | File size | ≤ 8 MB per screenshot |
 | Recommended phone | 1080 × 1920 |
-| Feature graphic | 1024 × 500 |
 
 ## App Store Requirements
 

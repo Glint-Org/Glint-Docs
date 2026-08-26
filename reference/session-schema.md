@@ -12,7 +12,7 @@ Used to transfer screenshot sessions between Glint-Capture / Bridge → Web → 
     "android/pixel9/home.png",
     "android/pixel9/profile.png"
   ],
-  "store": "play",
+  "store": "play/phone",
   "version": "1.0",
   "locales": ["en-US"],
   "exportedAt": "2026-06-30T12:00:00.000Z"
@@ -27,7 +27,7 @@ For Glint Web frames, Capture writes **one primary device** in `screens` (e.g. `
 | `app` | string | yes | App name or package ID |
 | `tagline` | string | no | Short marketing tagline |
 | `screens` | string[] | yes | Ordered list of screenshot filenames or URLs |
-| `store` | string | no | Store target: `play`, `ios`, or `ios-tablet` (default: `play`) |
+| `store` | string | no | Platform/device target (default `play/phone`). Canonical: `play/phone`, `play/tablet-7`, `play/tablet-10`, `play/tv`, `play/wear`, `play/chromebook`, `ios/iphone`, `ios/ipad`. Legacy aliases: `play`, `ios`, `ios-tablet` |
 | `locales` | string[] | no | BCP-47 tags for Fastlane folders (default `["en-US"]`) |
 | `version` | string | yes | Schema version |
 | `exportedAt` | string (ISO) | yes | Export timestamp |
