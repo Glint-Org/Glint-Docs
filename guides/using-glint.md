@@ -7,8 +7,10 @@ You can work **manually**, **with automation**, or **with an AI agent**. Same fi
 ## Manual
 
 1. Capture
-   - Flutter: `glint init` then `glint capture` (see [Setup](setup.md))
-   - Or Android device: Glint Bridge
+   - Flutter manual: `glint init` → edit rules → `glint capture`
+   - Flutter auto: `glint capture --auto` (scans `lib/` for screens)
+   - Or ask Cursor / Copilot to capture store screenshots
+   - Or Android/web: Glint Bridge
    - Or drop PNG files into Glint Web
 2. Open **Glint Web** (`cd Glint-Web && npm run dev`)
 3. **Assets** → import the capture folder, or upload PNGs

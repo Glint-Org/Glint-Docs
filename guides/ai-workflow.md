@@ -1,66 +1,51 @@
 # AI-Assisted Glint Workflow
 
-Developers can use Glint by hand, in CI, or with Cursor / Copilot / any agentic IDE. Rules and skills in this repo tell the agent what to do. The agent installs Capture, captures **real** UI, then uses Glint Web (with the same templates) to polish and export.
+Developers use Glint by hand or ask **Cursor / Copilot / Claude** to do it. The agent is the brain — **no Capture API keys** to paste.
 
-**Reference:** all of [Glint-Docs](../README.md) is markdown - read it here or on GitHub.
+**Reference:** all of [Glint-Docs](../README.md) is markdown.
 
-## What AI can do today
+## Dual capture → Web polish
 
-| Step | AI action | Tool |
-|------|-----------|------|
-| Install Capture | Add dependency, run `glint init` | Glint-Capture CLI |
-| Define screens | Write `GLINTRule.screen()` rules | Dart test file |
-| Capture | Run `glint capture` | Flutter test runner |
-| Verify output | Check `session.json` + PNGs exist | Filesystem |
-| Guide design | Pick template, write captions, recolor | Glint Web |
-| Export | `{AppName}.zip` or `glint.zip` | Glint Web |
+```
+┌─ Capture (Flutter, no device) ─┐
+│  Manual: write GLINTRules      │
+│  Auto: glint capture --auto    │──► session.json + PNGs ──► Glint Web
+│  Agent: discover + capture     │         │                    (templates,
+└────────────────────────────────┘         │                     polish, ZIP)
+┌─ Bridge (device / web) ────────┐         │
+│  Manual: capture / batch       │─────────┘
+│  Crawl: heuristic or --ai      │
+└────────────────────────────────┘
+```
+
+| Path | Manual | Auto / agent |
+|------|--------|----------------|
+| Capture | Edit rules → `glint capture` | `glint capture --auto` or ask the IDE agent |
+| Bridge | `capture` / `batch` | `crawl` / agent via MCP (`glint_bridge_crawl`) |
+
+## What the agent should do
+
+| Step | Action | Tool |
+|------|--------|------|
+| Discover Flutter screens | Scan `lib/`, write real `GLINTRule`s | `glint discover` / MCP `glint_discover` |
+| Capture Flutter | Widget-test screenshots | `glint capture` / MCP `glint_capture` |
+| Crawl Android/web | Real device/browser frames | Bridge / MCP `glint_bridge_crawl` |
+| Validate | Check session + PNGs | MCP `glint_validate_session` |
+| Polish | Templates, captions, colors | Glint Web |
+| Export | ZIP | Web or `glint_export` |
 
 ## What AI should not do
 
-- Generate fake UI screenshots (App Store rejection risk)
-- Skip real app widgets in Capture rules
-- Mix Play and App Store sizes in one export batch
-- Add misleading marketing copy
+- Ask developers for OpenAI/Anthropic keys for **Capture**
+- Generate fake UI screenshots
+- Leave placeholder scaffolds when real screens exist
 
-## Setup for Cursor
+## Example
 
-Project includes:
+**Developer:** "Capture Play Store screenshots for this Flutter app"
 
-- **Skill:** `.cursor/skills/glint-screenshot-workflow/SKILL.md` - full pipeline instructions
-- **Rule:** `.cursor/rules/glint-ecosystem.mdc` - always-on conventions
-
-Ask your agent: *"Set up Glint Capture and capture store screenshots for this app"* - it should follow the skill.
-
-## Example conversation
-
-**Developer:** "I need Play Store screenshots for my Flutter app"
-
-**AI should:**
-1. Add `glint_capture` to dev_dependencies
-2. Run `glint init`
-3. Create rules for home, features, settings screens
-4. Run `glint capture`
-5. Instruct developer to open Glint Web → import `glint_screenshots/` folder
-6. Recommend a template pack (Play / App Store / iPad) in Glint Web
-7. Recolor art to brand colors, set tagline, export ZIP at store size
-8. Optional: Copy for Glint View → paste on device for listing QA
-
-## Phase 2 (agent automation — shipped scaffolding)
-
-- **Glint MCP** ([Glint-MCP](../../Glint-MCP/README.md)): `glint_init`, `glint_capture`, `glint_validate_session`, `glint_export`, `glint_bridge_crawl`
-- **Bridge intelligent crawl:** user-owned API key (`GLINT_AI_API_KEY`) + `--ai` — navigates Android/web and keeps real store-worthy frames
-- **Headless export:** `Glint-Web` route `/export` + `npm run headless:export -- --session … --template blink-play --out out.zip`
-- **Fastlane ZIP layout:** Web export toggle or `--layout fastlane`
-- Template selection via CLI flags / MCP args
-
-## Phase 3 (future)
-
-- CI GitHub Action: capture → export → artifact upload
-- Direct Play / ASC upload helpers
+**Agent should:** `glint init` if needed → discover/write real rules → `glint capture` → point them at Glint Web import → template → export.
 
 ## Related docs
 
-- [Setup](setup.md)
-- [Workflow](workflow.md)
-- [Session Schema](../reference/session-schema.md)
-- [Export Spec](../reference/export-spec.md)
+- [Setup](setup.md) · [Workflow](workflow.md) · [Using Glint](using-glint.md)

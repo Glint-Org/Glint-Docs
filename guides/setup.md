@@ -2,8 +2,8 @@
 
 ## Quick start (soft launch)
 
-1. Add Capture (`ref: v0.1.0` git dep) → `glint init` → write real-screen rules → `glint capture` (**pixel9** only).  
-2. Open Glint Web (`npm run dev` or hosted URL) → Import folder → Blink / Warm Glow → Export ZIP.  
+1. Add Capture (`ref: v0.1.0` git dep) → `glint init` → write rules **or** `glint capture --auto` → PNGs (**pixel9**).  
+2. Open Glint Web (`npm run dev` or hosted URL) → Import folder → template → polish → Export ZIP.  
 3. Optional: Copy for Glint View → paste on device.
 
 Full walkthrough: [golden-path.md](golden-path.md). Verify: [smoke-checklist.md](smoke-checklist.md).
@@ -37,6 +37,9 @@ cd Glint-Capture/example && fvm use 3.44.1 && fvm flutter pub get
 
 dart pub global activate --source path /path/to/Glint-Capture
 glint init
+# Manual: edit test/glint_screenshots_test.dart → glint capture
+# Auto:   glint capture --auto
+# Agent:  ask Cursor / Copilot to capture store screenshots
 glint capture
 ```
 

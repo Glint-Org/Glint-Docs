@@ -5,13 +5,15 @@
 ### Path A: Glint Capture (Flutter, no device)
 
 ```
-Flutter app + screenshot rules → glint capture → glint_screenshots/ (+ session.json)
+Flutter app + rules OR AI discover → glint capture → glint_screenshots/ (+ session.json)
 ```
 
 1. Add `glint_capture` to `dev_dependencies` (path or git; see Capture README)
 2. Run `glint init` (or create `test/glint_screenshots_test.dart` with `glintScreenshots()` rules)
 3. Edit `glint.yaml` - app name, tagline, store, devices
-4. Run: `glint capture` (or `flutter test test/glint_screenshots_test.dart`)
+4. **Manual:** edit rules with real widgets → `glint capture`  
+   **Auto:** `glint capture --auto` (scans `lib/` `*Screen`/`*Page`, writes builders, captures)  
+   **Agent:** ask Cursor / Copilot — no API keys
 5. Output: PNGs under `android|ios/<device>/` **and** root `session.json` (primary device paths for Web frames)
 
 **Tip:** Soft launch with one device (e.g. `pixel9`) so frames map 1:1 to your screen sequence.
