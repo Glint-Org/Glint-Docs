@@ -6,8 +6,6 @@ Used to transfer screenshot sessions between Glint-Capture / Bridge → Web → 
 
 ```json
 {
-  "app": "com.example.app",
-  "tagline": "Edit Photos Like a Pro",
   "screens": [
     "android/pixel9/home.png",
     "android/pixel9/profile.png"
@@ -20,14 +18,13 @@ Used to transfer screenshot sessions between Glint-Capture / Bridge → Web → 
 ```
 
 For Glint Web frames, Capture writes **one primary device** in `screens` (e.g. `pixel9` for Play). Other device folders may exist on disk. Soft-launch tip: capture a single device.
+
 ## Fields
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
-| `app` | string | yes | App name or package ID |
-| `tagline` | string | no | Short marketing tagline |
-| `screens` | string[] | yes | Ordered list of screenshot filenames or URLs |
-| `store` | string | no | Platform/device target (default `play/phone`). Canonical: `play/phone`, `play/tablet-7`, `play/tablet-10`, `play/tv`, `play/wear`, `play/chromebook`, `ios/iphone`, `ios/ipad`. Legacy aliases: `play`, `ios`, `ios-tablet` |
+| `screens` | string[] | yes | Ordered list of screenshot filenames or data URLs |
+| `store` | string | yes | Platform/device target. Canonical: `play/phone`, `play/tablet-7`, `play/tablet-10`, `play/tv`, `play/wear`, `play/chromebook`, `ios/iphone`, `ios/ipad` |
 | `locales` | string[] | no | BCP-47 tags for Fastlane folders (default `["en-US"]`) |
 | `version` | string | yes | Schema version |
 | `exportedAt` | string (ISO) | yes | Export timestamp |
@@ -40,8 +37,8 @@ For Glint Web frames, Capture writes **one primary device** in `screens` (e.g. `
 
 ## Producers
 
-| Producer | Writes `session.json`? | Notes |
-|----------|------------------------|-------|
-| Glint-Capture | Yes | After all screenshots; `screens` list nested paths |
-| Glint-Bridge | Yes | On capture / batch / crawl / server |
-| Glint-Web | Yes (clipboard) | View paste embeds rendered frame data URLs |
+| Producer | Writes `session.json`? | `store` format | Notes |
+|----------|------------------------|----------------|-------|
+| Glint-Capture | Yes | `play/phone`, `ios/iphone`, `ios/ipad` | After all screenshots; `screens` list relative paths |
+| Glint-Bridge | Yes | `play/phone` (default) | On capture / batch / crawl / server |
+| Glint-Web | Yes (clipboard) | Pass-through | View paste embeds rendered frame data URLs |
