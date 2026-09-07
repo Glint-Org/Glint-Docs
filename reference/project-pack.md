@@ -1,4 +1,4 @@
-# Glint project pack (`.glintpack`)
+# Glint project pack (`.glint`)
 
 Editable round-trip format between **Glint Web** and **Glint View**.
 
@@ -8,11 +8,11 @@ Editable round-trip format between **Glint Web** and **Glint View**.
 |--------|---------|---------------------|
 | Store PNG ZIP | Play / App Store upload | No (flat art) |
 | Copy for Glint View | Quick listing preview (data URLs) | No |
-| **`.glintpack`** | Save project, phone Store Room, reopen in Web | **Yes — pixel-perfect** |
+| **`.glint`** | Save project, phone Store Room, reopen in Web | **Yes — pixel-perfect** |
 
 ## File shape
 
-ZIP (extension `.glintpack`):
+ZIP (extension `.glint`):
 
 ```
 project.json
@@ -25,13 +25,13 @@ assets/fabric/frame-N/*.png    # bitmaps from the live canvas
 
 ## Web
 
-- **Export** → Download `.glintpack`
-- **Assets** → Open `.glintpack (editable)`
+- **Export** → Download `.glint`
+- **Assets** → Open `.glint (editable)`
 
 ## View
 
-- **Import `.glintpack`** → Store Room (previews + keeps pack on device)
-- **Share `.glintpack` to Web** → send file back for more edits
+- **Import `.glint`** → Store Room (previews + keeps pack on device)
+- **Share `.glint` to Web** → send file back for more edits
 
 ## Policy
 
