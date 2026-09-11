@@ -41,3 +41,6 @@ Run before every public soft-launch build. Mark each item.
 
 - [ ] Skill / MCP: `glint_validate_session` accepts a Capture folder
 - [ ] Skill / MCP: headless export produces a ZIP from session + template id
+- [ ] Docs: [Editor modes](../reference/editor-modes.md) + [Copilot](copilot-mode.md) linked from docs index
+- [ ] (When Copilot P1+) Canvas Agent API: set scale/angle matches sidebar; Pause stops verbs
+- [ ] (When Copilot P3+) Telepresence: status line shows current verb; human edit bumps generation

@@ -1,6 +1,8 @@
 # AI-Assisted Glint Workflow
 
-Developers use Glint by hand or ask **Cursor / Copilot / Claude** to do it. The agent is the brain — **no Capture API keys** to paste.
+Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to run tools (**Mode 2**), or — when Copilot ships — share a live editor session (**Mode 3**). The agent is the brain — **no Capture API keys** to paste for polish.
+
+**Modes overview:** [Editor modes](../reference/editor-modes.md) · **Copilot guide:** [Copilot mode](copilot-mode.md)
 
 **Reference:** all of [Glint-Docs](../README.md) is markdown.
 
@@ -18,34 +20,45 @@ Developers use Glint by hand or ask **Cursor / Copilot / Claude** to do it. The 
 └────────────────────────────────┘
 ```
 
-| Path | Manual | Auto / agent |
-|------|--------|----------------|
-| Capture | Edit rules → `glint capture` | `glint capture --auto` or ask the IDE agent |
-| Bridge | `capture` / `batch` | `crawl` / agent via MCP (`glint_bridge_crawl`) |
+| Path | Manual (Mode 1) | Headless / agent (Mode 2) |
+|------|-----------------|---------------------------|
+| Capture | Edit rules → `glint capture` | `glint capture --auto` or MCP `glint_capture` |
+| Bridge | `capture` / `batch` | crawl / MCP Bridge tools |
+| Design | Glint Web sidebar | `glint_render` / export tools |
+| Live co-edit | — | Mode 3 Copilot *(roadmap)* |
 
-## What the agent should do
+## What the agent should do (Mode 2)
 
 | Step | Action | Tool |
 |------|--------|------|
 | Discover Flutter screens | Scan `lib/`, write real `GLINTRule`s | `glint discover` / MCP `glint_discover` |
 | Capture Flutter | Widget-test screenshots | `glint capture` / MCP `glint_capture` |
-| Crawl Android/web | Real device/browser frames | Bridge / MCP `glint_bridge_crawl` |
+| Crawl Android/web | Real device/browser frames | Bridge / MCP Bridge tools |
 | Validate | Check session + PNGs | MCP `glint_validate_session` |
-| Polish | Templates, captions, colors | Glint Web |
+| Compose / edit | Headlines, colors, bezel (no browser) | MCP `glint_render` |
+| Polish by eye | Templates, captions, scale, rotation | Glint Web (Mode 1) |
 | Export | ZIP | Web or `glint_export` |
+| Live “watch me work” | Shared board + telepresence | Mode 3 — see [Copilot](copilot-mode.md) |
 
 ## What AI should not do
 
 - Ask developers for OpenAI/Anthropic keys for **Capture**
 - Generate fake UI screenshots
 - Leave placeholder scaffolds when real screens exist
+- Clobber human canvas edits without re-reading editor state (especially in Mode 3)
 
 ## Example
 
 **Developer:** "Capture Play Store screenshots for this Flutter app"
 
-**Agent should:** `glint init` if needed → discover/write real rules → `glint capture` → point them at Glint Web import → template → export.
+**Agent should:** `glint init` if needed → discover/write real rules → `glint capture` → validate → either `glint_export` / `glint_render` (Mode 2) or point them at Glint Web for Mode 1 polish.
+
+**Developer (later):** "I'm in the editor — match the other frames to my Frame 1 device size and angle"
+
+**Agent should (Mode 3):** read editor state → apply canvas verbs with telepresence → stop if they Pause / Take over.
 
 ## Related docs
 
+- [Editor modes](../reference/editor-modes.md) · [Copilot mode](copilot-mode.md)
 - [Setup](setup.md) · [Workflow](workflow.md) · [Using Glint](using-glint.md)
+- [Glint-MCP](../../Glint-MCP/README.md)

@@ -8,7 +8,9 @@ Soft-launch path: **Capture / Bridge → Web (frames) → View (preview)**.
 
 - [**Golden path**](guides/golden-path.md) - first ZIP in &lt; 15 minutes
 - [Smoke checklist](guides/smoke-checklist.md) - pre-release QA
-- [How to use Glint](guides/using-glint.md) - manual, automation, and AI
+- [How to use Glint](guides/using-glint.md) - Manual · Headless/MCP · Copilot
+- [Editor modes](reference/editor-modes.md) - three ways to drive the same verbs
+- [Copilot mode](guides/copilot-mode.md) - watch AI work + teach-by-edit *(design)*
 - [Setup](guides/setup.md) - install Capture, Bridge, Web, View
 - [Workflow](guides/workflow.md) - capture → design → export → preview
 - [AI workflow](guides/ai-workflow.md) - Cursor / Copilot / agents / MCP
@@ -21,11 +23,13 @@ Soft-launch path: **Capture / Bridge → Web (frames) → View (preview)**.
 | **Glint-Capture** | Flutter package - device-free capture + `session.json` |
 | **Glint-Bridge** | Python ADB capture for Android (+ localhost WebSocket) |
 | **Glint-Web** | Frames editor - template packs, layers, ZIP, View handoff |
+| **Glint-MCP** | Agent tools for Capture / Bridge / headless export |
 | **Glint-View** | Store Room + listing preview; `.glint` round-trip |
 
 ## Reference
 
 - [Architecture](reference/architecture.md)
+- [Editor modes](reference/editor-modes.md)
 - [Session schema](reference/session-schema.md)
 - [Project pack (.glint)](reference/project-pack.md)
 - [Export spec](reference/export-spec.md)

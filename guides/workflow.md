@@ -37,6 +37,14 @@ Android Device → USB/WiFi → Glint Bridge → output/ + session.json
 session.json + PNGs → Glint Web → template pack → frames board → ZIP
 ```
 
+Design happens in one of three [editor modes](../reference/editor-modes.md):
+
+| Mode | How |
+|------|-----|
+| **Manual** | Import session → template → edit board (scale %, rotation °, bezel, colors) → export |
+| **Headless / MCP** | Agent/`glint_render`/`glint_export` without babysitting the UI — [AI workflow](ai-workflow.md) |
+| **Copilot** | Agent + you on one board (watch + teach-by-edit) — [Copilot mode](copilot-mode.md) *(roadmap)* |
+
 - Import session folder (drag Capture output or Bridge `output/`)
 - Pick a **platform → device** template pack (loads 1–10 frames)
 - Edit on the **frames board**: headlines, colors, device screenshots, layers
