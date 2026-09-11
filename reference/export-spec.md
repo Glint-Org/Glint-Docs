@@ -69,7 +69,7 @@ Enable in Glint Web export panel (**ZIP layout → Fastlane**) or headless `--la
 
 After Preview or ZIP export in Glint Web:
 
-1. **Copy for Glint View** — clipboard JSON with full `data:` screens (recommended)
-2. **QR** — compact app/tagline/store metadata only; use paste for images
+1. **Copy for Glint View** - clipboard JSON with full `data:` screens (recommended)
+2. **QR** - compact app/tagline/store metadata only; use paste for images
 
 View is preview-only; it does not edit frames.

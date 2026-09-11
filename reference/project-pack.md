@@ -8,7 +8,7 @@ Editable round-trip format between **Glint Web** and **Glint View**.
 |--------|---------|---------------------|
 | Store PNG ZIP | Play / App Store upload | No (flat art) |
 | Copy for Glint View | Quick listing preview (data URLs) | No |
-| **`.glint`** | Save project, phone Store Room, reopen in Web | **Yes — pixel-perfect** |
+| **`.glint`** | Save project, phone Store Room, reopen in Web | **Yes - pixel-perfect** |
 
 ## File shape
 

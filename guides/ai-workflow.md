@@ -1,6 +1,6 @@
 # AI-Assisted Glint Workflow
 
-Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to run tools (**Mode 2**), or — when Copilot ships — share a live editor session (**Mode 3**). The agent is the brain — **no Capture API keys** to paste for polish.
+Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to run tools (**Mode 2**), or - when Copilot ships - share a live editor session (**Mode 3**). The agent is the brain - **no Capture API keys** to paste for polish.
 
 **Modes overview:** [Editor modes](../reference/editor-modes.md) · **Copilot guide:** [Copilot mode](copilot-mode.md)
 
@@ -25,7 +25,7 @@ Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to 
 | Capture | Edit rules → `glint capture` | `glint capture --auto` or MCP `glint_capture` |
 | Bridge | `capture` / `batch` | crawl / MCP Bridge tools |
 | Design | Glint Web sidebar | `glint_render` / export tools |
-| Live co-edit | — | Mode 3 Copilot *(roadmap)* |
+| Live co-edit | - | Mode 3 Copilot *(roadmap)* |
 
 ## What the agent should do (Mode 2)
 
@@ -38,7 +38,7 @@ Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to 
 | Compose / edit | Headlines, colors, bezel (no browser) | MCP `glint_render` |
 | Polish by eye | Templates, captions, scale, rotation | Glint Web (Mode 1) |
 | Export | ZIP | Web or `glint_export` |
-| Live “watch me work” | Shared board + telepresence | Mode 3 — see [Copilot](copilot-mode.md) |
+| Live “watch me work” | Shared board + telepresence | Mode 3 - see [Copilot](copilot-mode.md) |
 
 ## What AI should not do
 
@@ -53,7 +53,7 @@ Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to 
 
 **Agent should:** `glint init` if needed → discover/write real rules → `glint capture` → validate → either `glint_export` / `glint_render` (Mode 2) or point them at Glint Web for Mode 1 polish.
 
-**Developer (later):** "I'm in the editor — match the other frames to my Frame 1 device size and angle"
+**Developer (later):** "I'm in the editor - match the other frames to my Frame 1 device size and angle"
 
 **Agent should (Mode 3):** read editor state → apply canvas verbs with telepresence → stop if they Pause / Take over.
 

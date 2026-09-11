@@ -13,7 +13,7 @@ Flutter app + rules OR AI discover → glint capture → glint_screenshots/ (+ s
 3. Edit `glint.yaml` - app name, tagline, store, devices
 4. **Manual:** edit rules with real widgets → `glint capture`  
    **Auto:** `glint capture --auto` (scans `lib/` `*Screen`/`*Page`, writes builders, captures)  
-   **Agent:** ask Cursor / Copilot — no API keys
+   **Agent:** ask Cursor / Copilot - no API keys
 5. Output: PNGs under `android|ios/<device>/` **and** root `session.json` (primary device paths for Web frames)
 
 **Tip:** Soft launch with one device (e.g. `pixel9`) so frames map 1:1 to your screen sequence.
@@ -42,15 +42,15 @@ Design happens in one of three [editor modes](../reference/editor-modes.md):
 | Mode | How |
 |------|-----|
 | **Manual** | Import session → template → edit board (scale %, rotation °, bezel, colors) → export |
-| **Headless / MCP** | Agent/`glint_render`/`glint_export` without babysitting the UI — [AI workflow](ai-workflow.md) |
-| **Copilot** | Agent + you on one board (watch + teach-by-edit) — [Copilot mode](copilot-mode.md) *(roadmap)* |
+| **Headless / MCP** | Agent/`glint_render`/`glint_export` without babysitting the UI - [AI workflow](ai-workflow.md) |
+| **Copilot** | Agent + you on one board (watch + teach-by-edit) - [Copilot mode](copilot-mode.md) *(roadmap)* |
 
 - Import session folder (drag Capture output or Bridge `output/`)
-- Pick a **platform → device** template pack (loads 1–10 frames)
+- Pick a **platform → device** template pack (loads 1-10 frames)
 - Edit on the **frames board**: headlines, colors, device screenshots, layers
 - Export ZIP (Play 1080×1920, App Store phone, or iPad sizes)
 
-### Step 3: Preview (Glint View) — preview only
+### Step 3: Preview (Glint View) - preview only
 
 ```
 Web Export → Preview frames → Copy for Glint View → paste in View
@@ -58,7 +58,7 @@ Web Export → Preview frames → Copy for Glint View → paste in View
 
 - Prefer **Copy for Glint View** after Preview/Export (includes full `data:` screens)
 - QR from Web carries **metadata only** (screenshots are too large for QR)
-- View shows Play / App Store style listing chrome — no frame editor
+- View shows Play / App Store style listing chrome - no frame editor
 
 ## Development Tips
 

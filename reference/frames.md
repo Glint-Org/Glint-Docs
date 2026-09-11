@@ -1,6 +1,6 @@
 # Device Frames
 
-Curated set only — the frames developers use most for Play and App Store. No long device catalog.
+Curated set only - the frames developers use most for Play and App Store. No long device catalog.
 
 SVGs: `Glint-Web/public/frames/`  
 Insets: `Glint-Web/src/utils/frameMeta.js`  

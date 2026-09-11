@@ -1,6 +1,6 @@
 # Store upload (Play / App Store)
 
-Glint exports **PNG ZIP** files. Upload is still manual (or Fastlane) — soft launch does not call Google/Apple APIs.
+Glint exports **PNG ZIP** files. Upload is still manual (or Fastlane) - soft launch does not call Google/Apple APIs.
 
 ## Google Play Console
 
@@ -33,4 +33,4 @@ fastlane/screenshots/phoneScreenshots/en-US/screen_1.png
 
 ## Compliance
 
-Screenshots must show **real app UI**. Glint Capture / Bridge produce real pixels — do not replace them with AI-fabricated mockups before upload.
+Screenshots must show **real app UI**. Glint Capture / Bridge produce real pixels - do not replace them with AI-fabricated mockups before upload.

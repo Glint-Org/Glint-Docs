@@ -17,7 +17,7 @@ dev_dependencies:
 dart pub get
 dart pub global activate --source git https://github.com/Glint-Org/Glint-Capture.git
 glint init
-# Edit rules for 3–5 real screens (home, feature, settings…)
+# Edit rules for 3-5 real screens (home, feature, settings…)
 # Soft launch: capture pixel9 only
 glint capture
 ```
@@ -45,4 +45,4 @@ cd Glint-Web && npm install && npm run dev
 
 ## 4. Upload
 
-Upload ZIP PNGs to Play Console / App Store Connect. Prefer **real UI only** — never invent screens.
+Upload ZIP PNGs to Play Console / App Store Connect. Prefer **real UI only** - never invent screens.

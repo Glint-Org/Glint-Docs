@@ -2,17 +2,17 @@
 
 Glint turns **real app screens** into store-ready frames. Soft-launch path: **Capture/Bridge → Web → View**.
 
-You work in one of **three editor modes** — same verbs (import, template, bezel, scale, rotate, theme, export), different surfaces. Full design: [Editor modes](../reference/editor-modes.md).
+You work in one of **three editor modes** - same verbs (import, template, bezel, scale, rotate, theme, export), different surfaces. Full design: [Editor modes](../reference/editor-modes.md).
 
 | Mode | Who drives | What you see |
 |------|------------|--------------|
 | **1. Manual** | You in Glint Web | Full editor |
 | **2. Headless / MCP** | Agent or CI via tools | Final screenshots / ZIP |
-| **3. Copilot** | You + agent on one board | Agent actions live in the editor — [Copilot](copilot-mode.md) |
+| **3. Copilot** | You + agent on one board | Agent actions live in the editor - [Copilot](copilot-mode.md) |
 
 Same files throughout: `session.json` + PNGs → Glint Web → ZIP → optional View preview.
 
-## Mode 1 — Manual
+## Mode 1 - Manual
 
 1. Capture
    - Flutter manual: `glint init` → edit rules → `glint capture`
@@ -28,7 +28,7 @@ Same files throughout: `session.json` + PNGs → Glint Web → ZIP → optional 
 
 No account. Work stays on your machine.
 
-## Mode 2 — Headless / MCP (automation + agents)
+## Mode 2 - Headless / MCP (automation + agents)
 
 **Today**
 
@@ -41,9 +41,9 @@ No account. Work stays on your machine.
 
 Agents **must not** generate fake UI. Details: [AI workflow](ai-workflow.md).
 
-## Mode 3 — Copilot (watch + edit)
+## Mode 3 - Copilot (watch + edit)
 
-Agent drives the **same** editor controls you use; you watch (and can take over), then teach (“I fixed frame 1 — do the rest like this”).
+Agent drives the **same** editor controls you use; you watch (and can take over), then teach (“I fixed frame 1 - do the rest like this”).
 
 1. Open Glint Web → **Allow agent** on the Copilot bar
 2. Hit **Demo** or drive `window.__GLINT_COPILOT__` / (soon) MCP editor tools

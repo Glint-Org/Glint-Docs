@@ -22,7 +22,7 @@ Glint has **one set of verbs** (import shots, pick template, set bezel, scale, r
      └───────────┘        └─────────────┘       └──────────────┘
 ```
 
-## Mode 1 — Manual
+## Mode 1 - Manual
 
 **Status:** shipped.
 
@@ -32,11 +32,11 @@ Open Glint Web, import a session or PNGs, pick a template pack, edit frames on t
 - Source of truth while editing: live Fabric canvas + project pack (`.glint`).
 - Docs: [Using Glint](../guides/using-glint.md), [Workflow](../guides/workflow.md).
 
-## Mode 2 — Headless / MCP
+## Mode 2 - Headless / MCP
 
 **Status:** shipped (Capture / Bridge / validate / render / export tools).
 
-An IDE agent (Cursor, Claude Code, Copilot) or CI calls **MCP / CLI** tools. Work happens **offstage** — no fake cursor in the editor. The user reviews **outputs** (session folder, rendered PNGs, ZIP).
+An IDE agent (Cursor, Claude Code, Copilot) or CI calls **MCP / CLI** tools. Work happens **offstage** - no fake cursor in the editor. The user reviews **outputs** (session folder, rendered PNGs, ZIP).
 
 | Concern | How Mode 2 handles it |
 |---------|------------------------|
@@ -47,13 +47,13 @@ An IDE agent (Cursor, Claude Code, Copilot) or CI calls **MCP / CLI** tools. Wor
 
 Rules:
 
-- Prefer **real** app screens — never fabricate UI tiles (App Store 2.3.10).
+- Prefer **real** app screens - never fabricate UI tiles (App Store 2.3.10).
 - Agent is the intelligence; do not paste Capture LLM keys into the product for Mode 2 polish.
 - Docs: [AI workflow](../guides/ai-workflow.md), [Glint-MCP README](../../Glint-MCP/README.md).
 
-## Mode 3 — Copilot (AI + developer)
+## Mode 3 - Copilot (AI + developer)
 
-**Status:** scaffold shipped in Glint Web (P1–P3 partial). Manual + MCP cover the verbs; Copilot adds a **live shared session** so those verbs are visible and interruptible.
+**Status:** scaffold shipped in Glint Web (P1-P3 partial). Manual + MCP cover the verbs; Copilot adds a **live shared session** so those verbs are visible and interruptible.
 
 **In the editor today**
 
@@ -67,9 +67,9 @@ Rules:
 ### Goals
 
 1. Developer tells the agent what to do in plain language (“darker frame 2, rotate −8°, extract theme”).
-2. User **watches** the editor respond (selection, controls, optional cursor) — fun and trustworthy, like competitor “AI at work” demos.
-3. User can **grab the wheel**: pause, nudge scale/rotation/copy by hand, then say “I fixed frame 1 — do the others like this.”
-4. Same pack / session files Mode 1 and 2 already use — no parallel truth.
+2. User **watches** the editor respond (selection, controls, optional cursor) - fun and trustworthy, like competitor “AI at work” demos.
+3. User can **grab the wheel**: pause, nudge scale/rotation/copy by hand, then say “I fixed frame 1 - do the others like this.”
+4. Same pack / session files Mode 1 and 2 already use - no parallel truth.
 
 ### Non-goals
 
@@ -100,7 +100,7 @@ Rules:
                                           Human sees + edits
 ```
 
-**Shared verbs (Canvas Agent API)** — one implementation used by UI handlers and by agents:
+**Shared verbs (Canvas Agent API)** - one implementation used by UI handlers and by agents:
 
 | Verb | Example |
 |------|---------|
@@ -114,14 +114,14 @@ Rules:
 | `setHeadline(i, text)` | Text layers |
 | `exportZip` / `savePack` | Export / `.glint` |
 
-**Telepresence** — every verb emits a short event stream (`select` → `pointerMove` → `apply` → `done`). The UI:
+**Telepresence** - every verb emits a short event stream (`select` → `pointerMove` → `apply` → `done`). The UI:
 
 - Moves a branded agent cursor (or selection pulse) to the target control / device.
 - Updates the real canvas (not a video of another machine).
 - Shows a small status line: “Agent: rotation −8° on Frame 2”.
 - Honors **Pause / Take over** so the human can edit without racing the agent.
 
-**Teach-from-edit** — after the human changes Frame 1:
+**Teach-from-edit** - after the human changes Frame 1:
 
 1. Agent reads current pack / selection (`getEditorState`).
 2. Diff or explicit “reference frame” id.
@@ -143,9 +143,9 @@ Local-only channel (WebSocket or same-origin EventSource) tied to an open editor
 
 - `present: false` → apply immediately (Mode 2 behavior inside an open tab).
 - `present: true` → telepresence pacing for demos.
-- Human edits bump a `generation` counter; agent must re-`getEditorState` before the next batch (“I’ve changed this — continue from here”).
+- Human edits bump a `generation` counter; agent must re-`getEditorState` before the next batch (“I’ve changed this - continue from here”).
 
-Auth: localhost + short-lived token (same idea as Bridge pairing) — never expose the canvas agent on a public URL without auth.
+Auth: localhost + short-lived token (same idea as Bridge pairing) - never expose the canvas agent on a public URL without auth.
 
 ### Implementation phases
 
@@ -157,7 +157,7 @@ Auth: localhost + short-lived token (same idea as Bridge pairing) — never expo
 | **P3** | 🟡 Telepresence: status bar, Pause/Take over, frame pulse (cursor path next) | “Fun to watch” |
 | **P4** | 🟡 `matchDeviceTransform` API (UI “match frame” next) | Competitor-style iterate loop |
 
-Until P2–P3 ship, agents should use Mode 2 and invite humans into Mode 1 for polish — already documented in [AI workflow](../guides/ai-workflow.md).
+Until P2-P3 ship, agents should use Mode 2 and invite humans into Mode 1 for polish - already documented in [AI workflow](../guides/ai-workflow.md).
 
 ### Mode choice cheat sheet
 
@@ -170,7 +170,7 @@ Until P2–P3 ship, agents should use Mode 2 and invite humans into Mode 1 for p
 
 ## Related
 
-- [Copilot mode guide](../guides/copilot-mode.md) — how developers and agents should work in Mode 3
+- [Copilot mode guide](../guides/copilot-mode.md) - how developers and agents should work in Mode 3
 - [Architecture](architecture.md)
 - [AI workflow](../guides/ai-workflow.md)
 - [Using Glint](../guides/using-glint.md)

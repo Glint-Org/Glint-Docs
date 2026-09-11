@@ -7,7 +7,7 @@
 ## When to use Copilot
 
 - You want to **see** the agent select frames, move scale/rotation, swap bezels, extract theme.
-- You will **interrupt** mid-run (“stop — use this headline instead”).
+- You will **interrupt** mid-run (“stop - use this headline instead”).
 - You fixed one frame by hand and want: **“do the other frames like this.”**
 
 Use **Headless / MCP** instead when you only care about the ZIP and speed (CI, overnight packs).
@@ -23,7 +23,7 @@ You (chat)  →  Agent  →  Canvas verbs  →  Live editor
 ```
 
 - **Truth** lives in the open project (canvas + `.glint` / session), not in the chat.
-- Every visible move should map to a **verb** (scale %, angle °, bezel id, theme extract, …) — same as Mode 1 controls and Mode 2 tools.
+- Every visible move should map to a **verb** (scale %, angle °, bezel id, theme extract, …) - same as Mode 1 controls and Mode 2 tools.
 - Watching is optional pacing (`present: true`); the underlying apply is identical to a silent tool call.
 
 ## Developer loop (target UX)
@@ -40,7 +40,7 @@ You (chat)  →  Agent  →  Canvas verbs  →  Live editor
 
 ## Agent rules (Mode 3)
 
-1. Call **canvas verbs** (or MCP editor tools) — do not invent pixels or fake UI screenshots.
+1. Call **canvas verbs** (or MCP editor tools) - do not invent pixels or fake UI screenshots.
 2. Before a multi-frame batch, call **`getEditorState`** (or equivalent) so human edits win.
 3. Prefer small, narrated steps when `present: true` (select frame → select device → set value).
 4. On **Pause / Take over**, stop issuing verbs until the human resumes.
@@ -55,7 +55,7 @@ Human polish is the best prompt.
 |--------------|--------------------------|
 | Selects Frame #1 device, sets scale 90%, angle −6° | Read transform; apply to other frames if asked |
 | Changes bezel on one slide | Propagate bezel id when asked to “match” |
-| Edits headline copy | Copy style/structure only if asked — don’t overwrite other copy blindly |
+| Edits headline copy | Copy style/structure only if asked - don’t overwrite other copy blindly |
 | Extracts theme once | Reuse palette; don’t re-extract unless asked |
 
 Reference selection explicitly in chat when possible: “use the **selected** device as the template.”
