@@ -2,7 +2,7 @@
 
 **Mode 3** of Glint’s [editor modes](../reference/editor-modes.md): an agent and a human share the **Glint Web** frames board. The agent runs the same actions as the sidebar; the human can watch, pause, edit, and teach.
 
-> **Status:** Designed. Manual (Mode 1) and Headless/MCP (Mode 2) are available today. Copilot builds on those — do not wait for Copilot to ship store screenshots; use Mode 1 + 2 now.
+> **Status:** Scaffold live in Glint Web. Open the editor → **Allow agent** on the Copilot bar → **Demo** to watch a presented rotate, or drive `window.__GLINT_COPILOT__` from the console. MCP `glint_editor_*` attach is next. Mode 1 + Mode 2 remain the production paths for shipping ZIPs.
 
 ## When to use Copilot
 
@@ -29,13 +29,13 @@ You (chat)  →  Agent  →  Canvas verbs  →  Live editor
 ## Developer loop (target UX)
 
 1. Open Glint Web with your session / pack loaded (Mode 1).
-2. Start a **Copilot session** (pair token / “Allow agent” in the editor — local only).
-3. In Cursor / Claude / Copilot, ask for changes in product language:
-   - “On Frame 2, set device scale to 85% and rotation to −12°.”
-   - “Extract theme from screenshots and apply.”
-   - “Match Frames 3–5 to Frame 1’s bezel and scale.”
-4. Watch the board update. Hit **Pause** or edit directly anytime.
-5. After a manual fix: “I’ve adjusted Frame 1 — apply the same device transform to the rest.”
+2. Click **Allow agent** on the Copilot bar (shows pair token + unlocks `window.__GLINT_COPILOT__`).
+3. Drive changes:
+   - **Demo** on the bar (presented select → rotate), or
+   - From DevTools / a local agent: `await __GLINT_COPILOT__.dispatch('setDeviceScale', { frameIndex: 0, pct: 85 }, { present: true, expectedGeneration: (await __GLINT_COPILOT__.getEditorState()).generation, token: __GLINT_COPILOT__.getToken() })`
+   - Chat agents (once MCP attach ships): “On Frame 2, set device scale to 85% and rotation to −12°.”
+4. Watch the board update (status line + frame pulse). Hit **Pause** or edit directly anytime.
+5. After a manual fix: ask to match other frames (API: `matchDeviceTransform`), or re-Allow and continue from a fresh `getEditorState`.
 6. Export ZIP / Copy for Glint View as usual.
 
 ## Agent rules (Mode 3)
@@ -60,13 +60,13 @@ Human polish is the best prompt.
 
 Reference selection explicitly in chat when possible: “use the **selected** device as the template.”
 
-## Fallback today (until Copilot ships)
+## Fallback / hybrid today
 
-| You want | Do this now |
-|----------|-------------|
-| Fast agent output | Mode 2: MCP `glint_capture` → `glint_validate_session` → `glint_render` / `glint_export` |
-| Visual polish | Mode 1: open Web, edit scale/rotation/theme (sidebar), export |
-| “Watch something work” | Run Mode 2 in the IDE while Web is open for **after** review; or screen-share Mode 1 while you drive |
+| You want | Do this |
+|----------|---------|
+| Fast agent output | Mode 2: MCP `glint_capture` → validate → `glint_render` / `glint_export` |
+| Visual polish | Mode 1: open Web, edit scale/rotation/theme, export |
+| Watch AI on the board | Mode 3: **Allow agent** → **Demo**, or `window.__GLINT_COPILOT__.dispatch(...)` |
 
 See [AI workflow](ai-workflow.md) and [Glint-MCP](../../Glint-MCP/README.md).
 
@@ -74,11 +74,13 @@ See [AI workflow](ai-workflow.md) and [Glint-MCP](../../Glint-MCP/README.md).
 
 Track against [editor-modes](../reference/editor-modes.md) phases:
 
-- [ ] **P1** Canvas Agent API over existing helpers (`setDeviceUniformScale`, `setDeviceAngle`, `replaceDeviceFrame`, theme extract, …)
-- [ ] **P2** MCP `glint_editor_*` (or live attach) against a paired editor tab
-- [ ] **P3** Telepresence: cursor/focus, status line, Pause / Take over
-- [ ] **P4** `matchFrame` / teach-from-selection helpers
-- [ ] Docs + skill/rule updates when each phase lands
+- [x] **P1** Canvas Agent API over existing helpers (`setDeviceUniformScale`, `setDeviceAngle`, …)
+- [x] **P2a** In-editor Copilot session + generation + `window.__GLINT_COPILOT__`
+- [ ] **P2b** MCP `glint_editor_*` against a paired editor tab
+- [x] **P3a** Telepresence: status line, Pause / Take over, frame pulse
+- [ ] **P3b** Branded agent cursor path to controls
+- [x] **P4a** `matchDeviceTransform` helper
+- [ ] **P4b** “Match other frames” UI + bezel/theme verbs in session
 - [ ] Smoke: agent rotates device → human nudges ° → agent continues without clobbering
 
 ## Related

@@ -53,7 +53,16 @@ Rules:
 
 ## Mode 3 — Copilot (AI + developer)
 
-**Status:** designed — build in phases (see below). Manual + MCP already cover the verbs; Copilot adds a **live shared session** so those verbs are visible and interruptible.
+**Status:** scaffold shipped in Glint Web (P1–P3 partial). Manual + MCP cover the verbs; Copilot adds a **live shared session** so those verbs are visible and interruptible.
+
+**In the editor today**
+
+- Bottom **Copilot** bar → **Allow agent** / **Pause** / **Resume** / **Demo**
+- Canvas Agent API + session generation lock (`window.__GLINT_COPILOT__` when enabled)
+- Telepresence: status label + frame pulse while the agent applies ops
+- Teach helper: `matchDeviceTransform` (scale + angle across frames)
+
+**Still to build:** MCP `glint_editor_*` attach (P2 complete), richer cursor path, bezel/theme verbs through the session, Match-frame UI button (P4).
 
 ### Goals
 
@@ -143,10 +152,10 @@ Auth: localhost + short-lived token (same idea as Bridge pairing) — never expo
 | Phase | Deliverable | Unlocks |
 |-------|-------------|---------|
 | **P0** | Document modes; keep Manual + MCP solid | Shared language for product/eng |
-| **P1** | Canvas Agent API wrapping existing editor helpers (`setDeviceUniformScale`, `setDeviceAngle`, bezel swap, theme extract, …) | Agents call the same code paths as the sidebar |
-| **P2** | MCP tools that hit a running Web editor (`glint_editor_*`) **or** extend `glint_render` with a live attach mode | Mode 3 without Playwright |
-| **P3** | Telepresence layer (cursor, toasts, pause/takeover) | “Fun to watch” |
-| **P4** | Teach-from-selection / “match frame N” | Competitor-style iterate loop |
+| **P1** | ✅ Canvas Agent API wrapping existing editor helpers | Agents call the same code paths as the sidebar |
+| **P2** | 🟡 In-editor session + `window.__GLINT_COPILOT__` (MCP `glint_editor_*` next) | Mode 3 without Playwright |
+| **P3** | 🟡 Telepresence: status bar, Pause/Take over, frame pulse (cursor path next) | “Fun to watch” |
+| **P4** | 🟡 `matchDeviceTransform` API (UI “match frame” next) | Competitor-style iterate loop |
 
 Until P2–P3 ship, agents should use Mode 2 and invite humans into Mode 1 for polish — already documented in [AI workflow](../guides/ai-workflow.md).
 

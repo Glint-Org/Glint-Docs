@@ -8,7 +8,7 @@ You work in one of **three editor modes** — same verbs (import, template, beze
 |------|------------|--------------|
 | **1. Manual** | You in Glint Web | Full editor |
 | **2. Headless / MCP** | Agent or CI via tools | Final screenshots / ZIP |
-| **3. Copilot** | You + agent on one board | Agent actions live in the editor *(designed — see [Copilot](copilot-mode.md))* |
+| **3. Copilot** | You + agent on one board | Agent actions live in the editor — [Copilot](copilot-mode.md) |
 
 Same files throughout: `session.json` + PNGs → Glint Web → ZIP → optional View preview.
 
@@ -43,12 +43,14 @@ Agents **must not** generate fake UI. Details: [AI workflow](ai-workflow.md).
 
 ## Mode 3 — Copilot (watch + edit)
 
-Designed path: agent drives the **same** editor controls you use, you watch (and can take over), then teach (“I fixed frame 1 — do the rest like this”).
+Agent drives the **same** editor controls you use; you watch (and can take over), then teach (“I fixed frame 1 — do the rest like this”).
+
+1. Open Glint Web → **Allow agent** on the Copilot bar
+2. Hit **Demo** or drive `window.__GLINT_COPILOT__` / (soon) MCP editor tools
+3. **Pause** anytime to edit by hand; Resume when ready
 
 - Guide: [Copilot mode](copilot-mode.md)
 - Spec: [Editor modes](../reference/editor-modes.md)
-
-Until Copilot ships, use Mode 2 for speed and Mode 1 for taste.
 
 ## Docs
 
