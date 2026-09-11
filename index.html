@@ -161,24 +161,44 @@
     .sidebar-nav {
       padding: 4px 8px 28px !important;
     }
-    .sidebar-nav p,
-    .sidebar-nav li strong {
-      margin: 14px 8px 6px;
+    .sidebar-nav ul {
+      margin: 0;
+      padding-left: 0 !important;
+      list-style: none;
+    }
+    /* Section labels (Start, Modes, Ship, Reference) - same column as Home */
+    .sidebar-nav > ul > li > p,
+    .sidebar-nav > ul > li > strong {
+      display: block;
+      margin: 14px 0 6px;
+      padding: 0 10px;
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--glint-muted);
     }
-    .sidebar-nav ul {
-      margin: 0;
-    }
-    .sidebar-nav li a {
+    /* Top-level pages (Home) */
+    .sidebar-nav > ul > li > a {
       border-radius: 8px;
       padding: 7px 10px !important;
       color: #3a3f48 !important;
       font-size: 13.5px;
       line-height: 1.35;
+    }
+    /* Nested page titles under a section - indented */
+    .sidebar-nav > ul > li > ul > li > a {
+      border-radius: 8px;
+      padding: 7px 10px 7px 22px !important;
+      color: #3a3f48 !important;
+      font-size: 13.5px;
+      line-height: 1.35;
+    }
+    /* In-page headings (subtitles) - one more step in */
+    .sidebar-nav > ul > li > ul > li > ul > li > a {
+      padding: 5px 10px 5px 34px !important;
+      font-size: 12.5px;
+      color: var(--glint-muted) !important;
     }
     .sidebar-nav li a:hover {
       background: #efece4;
@@ -297,7 +317,7 @@
       basePath: basePath,
       loadSidebar: true,
       autoHeader: false,
-      subMaxLevel: 2,
+      subMaxLevel: 0,
       auto2top: true,
       relativePath: false,
       alias: {

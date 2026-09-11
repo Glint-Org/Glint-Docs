@@ -1,16 +1,16 @@
 # Editor modes (Manual · Headless · Copilot)
 
-Glint has **one set of verbs** (import shots, pick template, set bezel, scale, rotate, theme, export). Those verbs are exposed three ways so humans and agents share the same outcome without three different products.
+Glint uses the **same actions** everywhere - import shots, pick a template, set bezel, scale, rotate, theme, export. You choose how those actions run:
 
-| Mode | Who drives | What the user sees | Best for |
-|------|------------|--------------------|----------|
-| **1. Manual** | Human in Glint Web | Full editor | Polish, taste, last-mile edits |
-| **2. Headless / MCP** | Agent or CI via tools | Final screenshots / ZIP (no live show) | Speed, CI, overnight packs |
-| **3. Copilot** | Agent + human on one board | Agent actions play out in the editor | Demos, trust, “watch AI work”, teach-by-edit |
+| Mode | Who drives | What you see | Best for |
+|------|------------|--------------|----------|
+| **1. Manual** | You in Glint Web | Full editor | Polish and last-mile taste |
+| **2. Headless / MCP** | Agent or CI via tools | Final screenshots / ZIP | Speed and automation |
+| **3. Copilot** | You + agent on one board | Agent actions live in the editor | Demos, trust, teach-by-edit |
 
 ```
                     ┌─────────────────────────┐
-                    │   Shared canvas verbs    │
+                    │   Same editor actions    │
                     │  select · scale · angle  │
                     │  bezel · theme · export  │
                     └────────────┬────────────┘
@@ -24,153 +24,41 @@ Glint has **one set of verbs** (import shots, pick template, set bezel, scale, r
 
 ## Mode 1 - Manual
 
-**Status:** shipped.
+Open Glint Web, import a session or PNGs, pick a template, edit frames (bezel, scale %, rotation °, colors, headlines), export ZIP, optionally hand off to View.
 
-Open Glint Web, import a session or PNGs, pick a template pack, edit frames on the board (device bezel, scale %, rotation °, colors, headlines), export ZIP / hand off to View.
-
-- No agent required.
-- Source of truth while editing: live Fabric canvas + project pack (`.glint`).
-- Docs: [Using Glint](../guides/using-glint.md), [Workflow](../guides/workflow.md).
+- No agent required  
+- Work stays in the live canvas and `.glint` pack  
+- Guide: [How to use Glint](../guides/using-glint.md) · [Workflow](../guides/workflow.md)  
 
 ## Mode 2 - Headless / MCP
 
-**Status:** shipped (Capture / Bridge / validate / render / export tools).
+An IDE agent (Cursor, Claude Code, Copilot) or CI calls **MCP / CLI** tools. Work happens offstage - you review the **outputs** (session folder, rendered PNGs, ZIP).
 
-An IDE agent (Cursor, Claude Code, Copilot) or CI calls **MCP / CLI** tools. Work happens **offstage** - no fake cursor in the editor. The user reviews **outputs** (session folder, rendered PNGs, ZIP).
+Typical tools: discover / capture / Bridge crawl / validate / render / export.  
+Guide: [AI workflow](../guides/ai-workflow.md) · [Glint-MCP](https://github.com/Glint-Org/Glint-MCP)
 
-| Concern | How Mode 2 handles it |
-|---------|------------------------|
-| Capture | `glint_discover` / `glint_capture` / Bridge tools |
-| Validate | `glint_validate_session` |
-| Compose / edit without browser | `glint_render` (and related tools) |
-| Store ZIP | `glint_export` against Web `/export` |
+**Rules:** prefer real app screens; never fabricate UI tiles; do not paste Capture LLM keys into the product for polish.
 
-Rules:
+## Mode 3 - Copilot
 
-- Prefer **real** app screens - never fabricate UI tiles (App Store 2.3.10).
-- Agent is the intelligence; do not paste Capture LLM keys into the product for Mode 2 polish.
-- Docs: [AI workflow](../guides/ai-workflow.md), [Glint-MCP README](../../Glint-MCP/README.md).
+You and an agent share the Glint Web board. The agent drives the same controls; you can watch, pause, and teach (“I fixed frame 1 - do the others like this”).
 
-## Mode 3 - Copilot (AI + developer)
+**In the editor today:** Copilot bar → **Allow agent** / **Pause** / **Demo**, with a live status line and frame highlight.
 
-**Status:** scaffold shipped in Glint Web (P1-P3 partial). Manual + MCP cover the verbs; Copilot adds a **live shared session** so those verbs are visible and interruptible.
+Guide: [Copilot mode](../guides/copilot-mode.md)
 
-**In the editor today**
-
-- Bottom **Copilot** bar → **Allow agent** / **Pause** / **Resume** / **Demo**
-- Canvas Agent API + session generation lock (`window.__GLINT_COPILOT__` when enabled)
-- Telepresence: status label + frame pulse while the agent applies ops
-- Teach helper: `matchDeviceTransform` (scale + angle across frames)
-
-**Still to build:** MCP `glint_editor_*` attach (P2 complete), richer cursor path, bezel/theme verbs through the session, Match-frame UI button (P4).
-
-### Goals
-
-1. Developer tells the agent what to do in plain language (“darker frame 2, rotate −8°, extract theme”).
-2. User **watches** the editor respond (selection, controls, optional cursor) - fun and trustworthy, like competitor “AI at work” demos.
-3. User can **grab the wheel**: pause, nudge scale/rotation/copy by hand, then say “I fixed frame 1 - do the others like this.”
-4. Same pack / session files Mode 1 and 2 already use - no parallel truth.
-
-### Non-goals
-
-- Replacing Mode 2 for CI (Copilot is slower by design).
-- Driving the editor only via raw DOM Playwright long-term (fine for prototypes; MCP + telepresence is the product path).
-- Generating fake screenshots.
-
-### Architecture
-
-```
-  IDE agent (Cursor / Claude / …)
-        │  intent (“make frames match frame 1”)
-        ▼
-  ┌─────────────────┐     tool calls      ┌──────────────────┐
-  │  Glint MCP      │ ──────────────────► │  Canvas Agent    │
-  │  (+ copilot     │                     │  API (verbs)     │
-  │   session id)   │ ◄────────────────── │  in Glint Web    │
-  └────────┬────────┘   ack + state       └────────┬─────────┘
-           │                                         │
-           │                              apply + emit events
-           │                                         ▼
-           │                              ┌──────────────────┐
-           │                              │  Telepresence    │
-           └──── optional live tail ─────►│  (cursor, focus, │
-                                          │   status toast)  │
-                                          └────────┬─────────┘
-                                                   ▼
-                                          Human sees + edits
-```
-
-**Shared verbs (Canvas Agent API)** - one implementation used by UI handlers and by agents:
-
-| Verb | Example |
-|------|---------|
-| `selectFrame(i)` | Focus artboard / Frame #N |
-| `selectDevice` | Active framed device |
-| `setDeviceScale(pct)` | Same as sidebar Scale % |
-| `setDeviceAngle(deg)` | Same as sidebar Rotation ° |
-| `setDeviceBezel(frameId)` | FrameSelector |
-| `setScreenshot(url)` | Import / replace / clear |
-| `extractTheme` | Colors → Extract theme |
-| `setHeadline(i, text)` | Text layers |
-| `exportZip` / `savePack` | Export / `.glint` |
-
-**Telepresence** - every verb emits a short event stream (`select` → `pointerMove` → `apply` → `done`). The UI:
-
-- Moves a branded agent cursor (or selection pulse) to the target control / device.
-- Updates the real canvas (not a video of another machine).
-- Shows a small status line: “Agent: rotation −8° on Frame 2”.
-- Honors **Pause / Take over** so the human can edit without racing the agent.
-
-**Teach-from-edit** - after the human changes Frame 1:
-
-1. Agent reads current pack / selection (`getEditorState`).
-2. Diff or explicit “reference frame” id.
-3. Replays verbs on Frames 2…N (Mode 2-speed under the hood, Mode 3 visuals if Copilot session is live).
-
-### Protocol sketch
-
-Local-only channel (WebSocket or same-origin EventSource) tied to an open editor tab:
-
-```json
-{
-  "sessionId": "copilot-…",
-  "op": "setDeviceAngle",
-  "args": { "frameIndex": 1, "degrees": -8 },
-  "present": true,
-  "paceMs": 420
-}
-```
-
-- `present: false` → apply immediately (Mode 2 behavior inside an open tab).
-- `present: true` → telepresence pacing for demos.
-- Human edits bump a `generation` counter; agent must re-`getEditorState` before the next batch (“I’ve changed this - continue from here”).
-
-Auth: localhost + short-lived token (same idea as Bridge pairing) - never expose the canvas agent on a public URL without auth.
-
-### Implementation phases
-
-| Phase | Deliverable | Unlocks |
-|-------|-------------|---------|
-| **P0** | Document modes; keep Manual + MCP solid | Shared language for product/eng |
-| **P1** | ✅ Canvas Agent API wrapping existing editor helpers | Agents call the same code paths as the sidebar |
-| **P2** | 🟡 In-editor session + `window.__GLINT_COPILOT__` (MCP `glint_editor_*` next) | Mode 3 without Playwright |
-| **P3** | 🟡 Telepresence: status bar, Pause/Take over, frame pulse (cursor path next) | “Fun to watch” |
-| **P4** | 🟡 `matchDeviceTransform` API (UI “match frame” next) | Competitor-style iterate loop |
-
-Until P2-P3 ship, agents should use Mode 2 and invite humans into Mode 1 for polish - already documented in [AI workflow](../guides/ai-workflow.md).
-
-### Mode choice cheat sheet
+## Which mode should I use?
 
 | Situation | Use |
 |-----------|-----|
 | Tweaking one headline by eye | **Manual** |
-| CI nightly store ZIP | **Headless / MCP** |
-| Demo for stakeholders / teaching the agent from a fixed frame | **Copilot** |
+| CI or overnight store ZIP | **Headless / MCP** |
+| Demo or “watch the AI work” | **Copilot** |
 | Capture only, design later | Capture/Bridge → then any mode |
 
 ## Related
 
-- [Copilot mode guide](../guides/copilot-mode.md) - how developers and agents should work in Mode 3
-- [Architecture](architecture.md)
-- [AI workflow](../guides/ai-workflow.md)
-- [Using Glint](../guides/using-glint.md)
+- [Copilot mode](../guides/copilot-mode.md)  
+- [AI workflow](../guides/ai-workflow.md)  
+- [Using Glint](../guides/using-glint.md)  
+- [Architecture](architecture.md)  

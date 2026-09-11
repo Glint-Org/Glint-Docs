@@ -1,6 +1,6 @@
 # Store upload (Play / App Store)
 
-Glint exports **PNG ZIP** files. Upload is still manual (or Fastlane) - soft launch does not call Google/Apple APIs.
+Glint exports **PNG ZIP** files. You upload them yourself in Play Console or App Store Connect (or via Fastlane). Glint does not call Google or Apple APIs for you.
 
 ## Google Play Console
 
@@ -29,7 +29,7 @@ fastlane/screenshots/phoneScreenshots/en-US/screen_1.png
 
 ## Locales
 
-`session.json` may include `locales: ["en-US", …]`. Soft launch ships **one locale** folder in Fastlane ZIPs (`en-US` default). Multi-locale caption packs are Phase C.
+`session.json` may include `locales: ["en-US", …]`. Fastlane ZIPs currently ship **one locale** folder (`en-US` by default).
 
 ## Compliance
 

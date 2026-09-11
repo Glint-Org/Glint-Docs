@@ -1,46 +1,35 @@
-# Soft-launch smoke checklist
+# Checklist
 
-Run before every public soft-launch build. Mark each item.
+Use this to confirm Glint works on your machine. Check each box as you go.
 
-## Capture
+## Capture (Flutter)
 
-- [ ] `dart pub global activate --source path .` from Glint-Capture succeeds
-- [ ] `glint init` in a Flutter app writes `glint.yaml` + test stub
-- [ ] `glint capture` with soft-launch device `pixel9` only produces PNGs + `session.json`
-- [ ] `session.json` has `version`, `app`, `screens`, and paths that resolve
+- [ ] `glint init` in a Flutter app writes `glint.yaml` and a test stub  
+- [ ] `glint capture` produces PNGs + `session.json` (try `pixel9` first)  
+- [ ] `session.json` lists screens whose image paths open correctly  
 
-## Bridge
+## Bridge (Android / web)
 
-- [ ] `python glint.py check` / `devices` lists ADB targets
-- [ ] `python glint.py capture` writes PNG + session
-- [ ] `python glint.py start` binds `ws://127.0.0.1:7700` with pairing token
-- [ ] Glint Web → Capture from Device receives a frame
+- [ ] `python glint.py devices` lists your ADB targets  
+- [ ] `python glint.py capture` writes a PNG and session  
+- [ ] `python glint.py start` shows a pairing token on `ws://127.0.0.1:7700`  
+- [ ] Glint Web can receive a frame from the Bridge  
 
-## Web
+## Web editor
 
-- [ ] `npm run build` succeeds; `npm run preview` serves the build
-- [ ] Import Capture/Bridge folder → screenshots map onto frames
-- [ ] Template swap replaces designs; screenshots stay
-- [ ] Device → None strips bezels; Design chrome (radius / border / shadow) applies without freezing
-- [ ] Device bezel re-select does **not** drift position
-- [ ] Export ZIP unzip: Play `1080×1920`, iOS `1290×2796`, iPad `2048×2732` as selected
-- [ ] Fastlane layout ZIP (when enabled) nests under `phoneScreenshots/` (or locale folder)
-- [ ] Copy for Glint View pastes a session JSON View can open
+- [ ] `npm run build` succeeds in Glint-Web  
+- [ ] Import a Capture/Bridge folder - screenshots land on frames  
+- [ ] Changing template keeps your screenshots  
+- [ ] Export ZIP matches the store size you picked  
+- [ ] **Copy for Glint View** pastes a session View can open  
 
 ## View
 
-- [ ] Paste session → listing preview shows frames at store aspect
+- [ ] Paste session - listing preview shows frames at store aspect  
 
-## Docs / hosting
+## Agents (optional)
 
-- [ ] Hosted Web URL loads (Cloudflare / Vercel / GH Pages)
-- [ ] Hosted Docs index links to Quick start + smoke checklist
-- [ ] Golden path README steps complete in &lt; 15 minutes on a clean machine
+- [ ] MCP `glint_validate_session` accepts a Capture folder  
+- [ ] MCP `glint_export` (or Web export) produces a ZIP  
 
-## Agent path
-
-- [ ] Skill / MCP: `glint_validate_session` accepts a Capture folder
-- [ ] Skill / MCP: headless export produces a ZIP from session + template id
-- [ ] Docs: [Editor modes](../reference/editor-modes.md) + [Copilot](copilot-mode.md) linked from docs index
-- [ ] (When Copilot P1+) Canvas Agent API: set scale/angle matches sidebar; Pause stops verbs
-- [ ] (When Copilot P3+) Telepresence: status line shows current verb; human edit bumps generation
+Next: [Golden path](golden-path.md) · [Store upload](store-upload.md)

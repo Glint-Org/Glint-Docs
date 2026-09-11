@@ -17,7 +17,7 @@ Used to transfer screenshot sessions between Glint-Capture / Bridge → Web → 
 }
 ```
 
-For Glint Web frames, Capture writes **one primary device** in `screens` (e.g. `pixel9` for Play). Other device folders may exist on disk. Soft-launch tip: capture a single device.
+For Glint Web frames, Capture writes **one primary device** in `screens` (for example `pixel9` for Play). Other device folders may exist on disk. Tip: capture a single device first.
 
 ## Fields
 

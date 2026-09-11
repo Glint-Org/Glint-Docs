@@ -1,12 +1,12 @@
-# Setup Guide
+# Setup
 
-## Quick start (soft launch)
+## Quick start
 
-1. Add Capture (`ref: v0.1.0` git dep) → `glint init` → write rules **or** `glint capture --auto` → PNGs (**pixel9**).  
-2. Open Glint Web (`npm run dev` or hosted URL) → Import folder → template → polish → Export ZIP.  
+1. Add Capture (`ref: v0.1.0` git dep) → `glint init` → write rules **or** `glint capture --auto` → PNGs (try **pixel9** first).  
+2. Open Glint Web (`npm run dev` or your hosted URL) → Import folder → template → polish → Export ZIP.  
 3. Optional: Copy for Glint View → paste on device.
 
-Full walkthrough: [golden-path.md](golden-path.md). Verify: [smoke-checklist.md](smoke-checklist.md).
+Full walkthrough: [Golden path](golden-path.md). Verify: [Checklist](smoke-checklist.md).
 
 ## Prerequisites
 

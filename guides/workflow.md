@@ -1,6 +1,6 @@
-# Development Workflow
+# Workflow
 
-## Full Pipeline (End to End)
+## Full pipeline
 
 ### Path A: Glint Capture (Flutter, no device)
 
@@ -16,7 +16,7 @@ Flutter app + rules OR AI discover → glint capture → glint_screenshots/ (+ s
    **Agent:** ask Cursor / Copilot - no API keys
 5. Output: PNGs under `android|ios/<device>/` **and** root `session.json` (primary device paths for Web frames)
 
-**Tip:** Soft launch with one device (e.g. `pixel9`) so frames map 1:1 to your screen sequence.
+**Tip:** Start with one device (for example `pixel9`) so frames map 1:1 to your screen sequence.
 
 ### Path B: Glint Bridge (Android device)
 
@@ -43,7 +43,7 @@ Design happens in one of three [editor modes](../reference/editor-modes.md):
 |------|-----|
 | **Manual** | Import session → template → edit board (scale %, rotation °, bezel, colors) → export |
 | **Headless / MCP** | Agent/`glint_render`/`glint_export` without babysitting the UI - [AI workflow](ai-workflow.md) |
-| **Copilot** | Agent + you on one board (watch + teach-by-edit) - [Copilot mode](copilot-mode.md) *(roadmap)* |
+| **Copilot** | Agent + you on one board (watch + teach-by-edit) - [Copilot mode](copilot-mode.md) |
 
 - Import session folder (drag Capture output or Bridge `output/`)
 - Pick a **platform → device** template pack (loads 1-10 frames)
@@ -60,21 +60,10 @@ Web Export → Preview frames → Copy for Glint View → paste in View
 - QR from Web carries **metadata only** (screenshots are too large for QR)
 - View shows Play / App Store style listing chrome - no frame editor
 
-## Development Tips
+## Tips
 
-- **Glint-Capture:** Prefer `glint capture`; the runner writes `session.json` in `tearDownAll`
-- **Bridge:** `python glint.py devices` first; `python glint.py start` for live Web pairing
-- **Web:** Frames board (not an infinite canvas); templates live in `public/templates/`
-- **View:** Paste Session JSON for image-backed preview; FVM Flutter 3.44.1
-- **Cross-repo:** Keep Bridge WebSocket running while developing Web capture; always pair with the token
-
-## Adding Features
-
-| Area | Typical Change |
-|------|---------------|
-| New template pack | Add JSON to `Glint-Web/public/templates/` and register in `templateLoader.js` |
-| New device preset | Add to `Glint-Capture/lib/src/devices.dart` |
-| New export format | Extend `exportHelper.js` EXPORT_PRESETS |
-| New frame SVG | Add SVG to `public/frames/` + insets in `frameMeta.js` |
-| New preview layout | Add widget in `Glint-View/lib/widgets/` |
-| Bridge action | Add handler in `websocket_server.py` + client method in `useGlintBridge.js` |
+- **Glint-Capture:** Prefer `glint capture`; the runner writes `session.json` when capture finishes  
+- **Bridge:** `python glint.py devices` first; `python glint.py start` for live Web pairing  
+- **Web:** Frames board (not an infinite canvas); templates live in `public/templates/`  
+- **View:** Paste Session JSON for image-backed preview  
+- **Bridge + Web:** Keep the Bridge WebSocket running while capturing into Web; pair with the token from the console  

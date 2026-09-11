@@ -1,10 +1,10 @@
 - [Home](README.md)
 - **Start**
   - [Golden path](guides/golden-path.md)
-  - [Smoke checklist](guides/smoke-checklist.md)
-  - [How to use Glint](guides/using-glint.md)
   - [Setup](guides/setup.md)
+  - [How to use Glint](guides/using-glint.md)
   - [Workflow](guides/workflow.md)
+  - [Checklist](guides/smoke-checklist.md)
 - **Modes**
   - [Editor modes](reference/editor-modes.md)
   - [Copilot mode](guides/copilot-mode.md)

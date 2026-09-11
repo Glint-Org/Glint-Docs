@@ -1,10 +1,8 @@
-# AI-Assisted Glint Workflow
+# AI-assisted workflow
 
-Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to run tools (**Mode 2**), or - when Copilot ships - share a live editor session (**Mode 3**). The agent is the brain - **no Capture API keys** to paste for polish.
+Use Glint by hand (**Mode 1**), ask **Cursor / Claude / Copilot** to run tools (**Mode 2**), or share a live editor session (**Mode 3** Copilot). The agent is the brain - you should not paste Capture LLM API keys into Glint for polish.
 
-**Modes overview:** [Editor modes](../reference/editor-modes.md) · **Copilot guide:** [Copilot mode](copilot-mode.md)
-
-**Reference:** all of [Glint-Docs](../README.md) is markdown.
+**Modes:** [Editor modes](../reference/editor-modes.md) · **Copilot:** [Copilot mode](copilot-mode.md)
 
 ## Dual capture → Web polish
 
@@ -25,7 +23,7 @@ Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to 
 | Capture | Edit rules → `glint capture` | `glint capture --auto` or MCP `glint_capture` |
 | Bridge | `capture` / `batch` | crawl / MCP Bridge tools |
 | Design | Glint Web sidebar | `glint_render` / export tools |
-| Live co-edit | - | Mode 3 Copilot *(roadmap)* |
+| Live co-edit | - | Mode 3 Copilot |
 
 ## What the agent should do (Mode 2)
 
@@ -61,4 +59,4 @@ Developers use Glint by hand (**Mode 1**), ask **Cursor / Copilot / Claude** to 
 
 - [Editor modes](../reference/editor-modes.md) · [Copilot mode](copilot-mode.md)
 - [Setup](setup.md) · [Workflow](workflow.md) · [Using Glint](using-glint.md)
-- [Glint-MCP](../../Glint-MCP/README.md)
+- [Glint-MCP](https://github.com/Glint-Org/Glint-MCP)

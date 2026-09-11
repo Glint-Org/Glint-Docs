@@ -1,8 +1,10 @@
 # How to use Glint
 
-Glint turns **real app screens** into store-ready frames. Soft-launch path: **Capture/Bridge → Web → View**.
+Glint turns **real app screens** into store-ready frames:
 
-You work in one of **three editor modes** - same verbs (import, template, bezel, scale, rotate, theme, export), different surfaces. Full design: [Editor modes](../reference/editor-modes.md).
+**Capture / Bridge → Web → ZIP → View (optional)**
+
+You work in one of **three modes** - same actions, different surfaces. Overview: [Editor modes](../reference/editor-modes.md).
 
 | Mode | Who drives | What you see |
 |------|------------|--------------|
@@ -35,7 +37,7 @@ No account. Work stays on your machine.
 - Add Capture as a Flutter `dev_dependency`
 - Keep rules in `test/glint_screenshots_test.dart` (real widgets only)
 - Run `glint capture` locally or in CI, or the repo scripts under `Glint-Capture/scripts/`
-- Or drive Capture / Bridge / export via **[Glint MCP](../../Glint-MCP/README.md)** from Cursor / Claude Code
+- Or drive Capture / Bridge / export via **[Glint MCP](https://github.com/Glint-Org/Glint-MCP)** from Cursor / Claude Code
 - Artifact: output folder with PNGs + `session.json` (and optionally a ZIP from `glint_export`)
 - Open Web only when you want Mode 1 polish
 
@@ -46,11 +48,11 @@ Agents **must not** generate fake UI. Details: [AI workflow](ai-workflow.md).
 Agent drives the **same** editor controls you use; you watch (and can take over), then teach (“I fixed frame 1 - do the rest like this”).
 
 1. Open Glint Web → **Allow agent** on the Copilot bar
-2. Hit **Demo** or drive `window.__GLINT_COPILOT__` / (soon) MCP editor tools
+2. Hit **Demo** or ask your coding agent (editor MCP tools are expanding)
 3. **Pause** anytime to edit by hand; Resume when ready
 
 - Guide: [Copilot mode](copilot-mode.md)
-- Spec: [Editor modes](../reference/editor-modes.md)
+- Overview: [Editor modes](../reference/editor-modes.md)
 
 ## Docs
 
