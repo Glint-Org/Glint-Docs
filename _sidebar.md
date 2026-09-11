@@ -18,4 +18,3 @@
   - [Export spec](reference/export-spec.md)
   - [WebSocket protocol](reference/websocket-protocol.md)
   - [Frames](reference/frames.md)
-  - [Project structure](reference/project-structure.md)
