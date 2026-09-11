@@ -31,7 +31,6 @@
     main {
       width: 100% !important;
       max-width: 100%;
-      overflow-x: hidden;
     }
 
     /* Reading column */
@@ -314,30 +313,50 @@
         max-width: 100%;
       }
       .content {
+        left: 0 !important;
+        position: relative !important;
         padding-top: 8px !important;
         max-width: 100%;
         overflow-x: hidden;
-      }
-      /* Overlay drawer: keep page still; don't shove content sideways */
-      body.close .content {
         transform: none !important;
       }
+      /* Keep reading pane still while the drawer overlays it */
+      body.close .content,
+      body.close .app-nav,
+      body.close .github-corner {
+        transform: none !important;
+      }
+
       /*
-        Backdrop is a body sibling; Docsify's main has z-index:0 which traps
-        .sidebar inside a lower stacking context - so the dim sat on top of
-        the drawer. Drop main's stacking context so the fixed sidebar can win.
+        Own the mobile drawer: park at left:0 and slide with transform.
+        Docsify's left:-300px + translateX(300px) is easy to break / clip.
       */
       main {
         z-index: auto !important;
-        overflow-x: hidden;
+        overflow: visible !important;
       }
       .sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: min(300px, 86vw) !important;
+        height: 100% !important;
+        max-height: 100dvh;
+        padding-top: 0 !important;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         z-index: 40 !important;
-        box-shadow: 8px 0 32px rgba(0, 0, 0, 0.12);
+        background: var(--glint-side);
+        box-shadow: 8px 0 32px rgba(0, 0, 0, 0.18);
+        transform: translate3d(-105%, 0, 0) !important;
+        transition: transform 0.25s ease-out !important;
+        will-change: transform;
       }
       body.close .sidebar {
-        transform: translateX(300px) !important;
+        transform: translate3d(0, 0, 0) !important;
       }
+
       .glint-side-backdrop {
         z-index: 35;
       }
@@ -345,7 +364,6 @@
         top: max(12px, env(safe-area-inset-top));
         left: max(12px, env(safe-area-inset-left));
       }
-      /* Corner badge is huge and can add sideways overflow */
       .github-corner svg {
         width: 56px !important;
         height: 56px !important;
