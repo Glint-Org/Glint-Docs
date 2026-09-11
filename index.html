@@ -211,18 +211,19 @@
       border-right: none;
     }
 
-    /* Hide stock hamburger (replaced by header button) */
+    /* Hide stock hamburger (we use .glint-open-side + header toggle) */
     .sidebar-toggle {
       display: none !important;
     }
 
-    /* When sidebar is collapsed, show a compact open control */
+    /* Floating menu control - visibility driven by [hidden] + JS
+       Docsify quirk: body.close means "collapsed" on desktop, "drawer open" on mobile */
     .glint-open-side {
-      display: none;
+      display: inline-flex;
       position: fixed;
       top: 12px;
       left: 12px;
-      z-index: 30;
+      z-index: 50;
       align-items: center;
       gap: 8px;
       height: 36px;
@@ -230,18 +231,32 @@
       border: 1px solid var(--glint-line);
       border-radius: 10px;
       background: #fff;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
       color: var(--glint-ink);
       font-size: 13px;
       font-weight: 600;
       cursor: pointer;
     }
-    body.close .glint-open-side {
-      display: inline-flex;
+    .glint-open-side[hidden] {
+      display: none !important;
     }
     .glint-open-side svg {
       width: 16px;
       height: 16px;
+    }
+
+    .glint-side-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 35;
+      background: rgba(26, 28, 31, 0.35);
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+    .glint-side-backdrop.is-on {
+      display: block;
     }
 
     /* Aesthetic scrollbars */
@@ -267,14 +282,31 @@
 
     @media screen and (max-width: 768px) {
       .markdown-section {
-        padding: 20px 18px 48px;
+        padding: 56px 18px 48px;
         font-size: 15.5px;
+      }
+      .content {
+        padding-top: 8px !important;
+      }
+      /* Overlay drawer: keep page still; don't shove content sideways */
+      body.close .content {
+        transform: none !important;
+      }
+      .sidebar {
+        z-index: 40;
+        box-shadow: 8px 0 32px rgba(0, 0, 0, 0.12);
+      }
+      /* Give room for the GitHub corner */
+      .glint-open-side {
+        top: max(12px, env(safe-area-inset-top));
+        left: max(12px, env(safe-area-inset-left));
       }
     }
   </style>
 </head>
 <body>
   <div id="app">Loading…</div>
+  <button type="button" class="glint-side-backdrop" aria-label="Close docs menu" tabindex="-1"></button>
   <button type="button" class="glint-open-side" aria-label="Open docs menu" hidden>
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <path d="M4 6h16M4 12h16M4 18h16" />
@@ -291,23 +323,49 @@
     var CHEVRON_RIGHT =
       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
 
-    function syncToggleUi() {
+    function isMobileNav() {
+      return window.matchMedia('(max-width: 768px)').matches;
+    }
+
+    /** true when the nav panel is not on screen */
+    function navHidden() {
       var closed = document.body.classList.contains('close');
+      // Desktop: close = collapsed. Mobile: close = drawer open.
+      return isMobileNav() ? !closed : closed;
+    }
+
+    function syncToggleUi() {
+      var hidden = navHidden();
+      var mobile = isMobileNav();
       var btn = document.querySelector('.glint-side-toggle');
       var openBtn = document.querySelector('.glint-open-side');
+      var backdrop = document.querySelector('.glint-side-backdrop');
+
       if (btn) {
-        btn.innerHTML = closed ? CHEVRON_RIGHT : CHEVRON_LEFT;
-        btn.setAttribute('aria-label', closed ? 'Expand sidebar' : 'Collapse sidebar');
-        btn.title = closed ? 'Expand' : 'Collapse';
+        btn.innerHTML = hidden ? CHEVRON_RIGHT : CHEVRON_LEFT;
+        btn.setAttribute('aria-label', hidden ? 'Open sidebar' : 'Close sidebar');
+        btn.title = hidden ? 'Open' : 'Close';
       }
       if (openBtn) {
-        openBtn.hidden = !closed;
+        openBtn.hidden = !hidden;
       }
+      if (backdrop) {
+        backdrop.classList.toggle('is-on', mobile && !hidden);
+      }
+      document.body.style.overflow = mobile && !hidden ? 'hidden' : '';
     }
 
     function toggleSidebar() {
       document.body.classList.toggle('close');
       syncToggleUi();
+    }
+
+    function closeMobileNav() {
+      if (!isMobileNav()) return;
+      if (document.body.classList.contains('close')) {
+        document.body.classList.remove('close');
+        syncToggleUi();
+      }
     }
 
     window.$docsify = {
@@ -358,6 +416,22 @@
               openBtn.addEventListener('click', toggleSidebar);
             }
 
+            var backdrop = document.querySelector('.glint-side-backdrop');
+            if (backdrop) {
+              backdrop.addEventListener('click', closeMobileNav);
+            }
+
+            sidebar.addEventListener('click', function (e) {
+              var a = e.target.closest && e.target.closest('a');
+              if (a) closeMobileNav();
+            });
+
+            window.addEventListener('resize', syncToggleUi);
+            syncToggleUi();
+          });
+
+          hook.doneEach(function () {
+            closeMobileNav();
             syncToggleUi();
           });
         },
