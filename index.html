@@ -23,17 +23,31 @@
     html, body {
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
       color: var(--glint-ink);
+      overflow-x: hidden;
+      max-width: 100%;
+    }
+
+    /* Docsify uses width:100vw on main - that causes horizontal scroll */
+    main {
+      width: 100% !important;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     /* Reading column */
     .content {
       padding-top: 24px;
+      max-width: 100%;
+      box-sizing: border-box;
     }
     .markdown-section {
       max-width: 740px;
       padding: 28px 36px 64px;
       line-height: 1.65;
       font-size: 16px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      box-sizing: border-box;
     }
     .markdown-section h1,
     .markdown-section h2,
@@ -62,10 +76,23 @@
     .markdown-section pre {
       border-radius: 10px;
       border: 1px solid var(--glint-line);
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .markdown-section pre > code {
+      white-space: pre;
+      word-break: normal;
     }
     .markdown-section table {
       display: block;
+      max-width: 100%;
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .markdown-section img {
+      max-width: 100%;
+      height: auto;
     }
     .markdown-section tr:nth-child(2n) {
       background-color: #faf9f6;
@@ -282,24 +309,46 @@
 
     @media screen and (max-width: 768px) {
       .markdown-section {
-        padding: 56px 18px 48px;
+        padding: 56px 16px 48px;
         font-size: 15.5px;
+        max-width: 100%;
       }
       .content {
         padding-top: 8px !important;
+        max-width: 100%;
+        overflow-x: hidden;
       }
       /* Overlay drawer: keep page still; don't shove content sideways */
       body.close .content {
         transform: none !important;
       }
+      /*
+        Backdrop is a body sibling; Docsify's main has z-index:0 which traps
+        .sidebar inside a lower stacking context - so the dim sat on top of
+        the drawer. Drop main's stacking context so the fixed sidebar can win.
+      */
+      main {
+        z-index: auto !important;
+        overflow-x: hidden;
+      }
       .sidebar {
-        z-index: 40;
+        z-index: 40 !important;
         box-shadow: 8px 0 32px rgba(0, 0, 0, 0.12);
       }
-      /* Give room for the GitHub corner */
+      body.close .sidebar {
+        transform: translateX(300px) !important;
+      }
+      .glint-side-backdrop {
+        z-index: 35;
+      }
       .glint-open-side {
         top: max(12px, env(safe-area-inset-top));
         left: max(12px, env(safe-area-inset-left));
+      }
+      /* Corner badge is huge and can add sideways overflow */
+      .github-corner svg {
+        width: 56px !important;
+        height: 56px !important;
       }
     }
   </style>
