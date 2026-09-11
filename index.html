@@ -14,27 +14,67 @@
     :root {
       --theme-color: #c9a227;
     }
+    .sidebar > h1.app-name {
+      margin: 0.6rem 0 0.4rem;
+    }
     .sidebar > h1 a {
       font-weight: 700;
       letter-spacing: -0.02em;
+      color: #1a1a1a;
+    }
+    .sidebar-nav li.active > a {
+      font-weight: 600;
+      border-right: 3px solid var(--theme-color);
+    }
+    /* Hamburger at top-left (vue theme defaults to bottom). */
+    .sidebar-toggle {
+      top: 10px;
+      bottom: auto !important;
+      background: transparent !important;
+      padding: 10px 12px;
+    }
+    .sidebar-toggle span {
+      background-color: #555;
+      width: 18px;
+    }
+    body.close .sidebar-toggle {
+      background: transparent !important;
+    }
+    @media screen and (max-width: 768px) {
+      .sidebar-toggle {
+        top: 8px;
+      }
     }
   </style>
 </head>
 <body>
   <div id="app">Loading…</div>
   <script>
+    // Project Pages live under /Glint-Docs/; local preview uses /
+    var basePath = /^\/Glint-Docs(\/|$)/.test(location.pathname)
+      ? '/Glint-Docs/'
+      : '/';
+
     window.$docsify = {
       name: 'Glint Docs',
       repo: 'https://github.com/Glint-Org/Glint-Docs',
       homepage: 'README.md',
+      basePath: basePath,
       loadSidebar: true,
-      autoHeader: true,
+      autoHeader: false,
       subMaxLevel: 2,
       auto2top: true,
-      relativePath: true,
+      relativePath: false,
+      // Always load the root sidebar so nested pages don't 404 _sidebar.md
+      // and so the active item stays in sync with the route.
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md',
+      },
+      notFoundPage: true,
       search: {
         placeholder: 'Search docs',
         noData: 'No results',
+        pathNamespaces: ['/guides', '/reference'],
       },
     };
   </script>

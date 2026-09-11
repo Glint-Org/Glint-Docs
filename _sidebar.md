@@ -1,4 +1,4 @@
-- [Home](/)
+- [Home](README.md)
 - **Start**
   - [Golden path](guides/golden-path.md)
   - [Smoke checklist](guides/smoke-checklist.md)
@@ -19,4 +19,3 @@
   - [WebSocket protocol](reference/websocket-protocol.md)
   - [Frames](reference/frames.md)
   - [Project structure](reference/project-structure.md)
-- [Deploy this site](DEPLOY.md)
