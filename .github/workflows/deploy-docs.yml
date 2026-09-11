@@ -22,8 +22,13 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           mkdir -p _site
-          rsync -a --exclude '.git' --exclude '.github' --exclude '_site' ./ _site/
-          printf '%s\n' '<!DOCTYPE html><meta http-equiv="refresh" content="0;url=README.md"><p><a href="README.md">Glint Docs</a></p>' > _site/index.html
+          rsync -a \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '_site' \
+            ./ _site/
+          # Ensure Jekyll is off (docsify + _sidebar.md)
+          touch _site/.nojekyll
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site

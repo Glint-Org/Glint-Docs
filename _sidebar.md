@@ -1,0 +1,22 @@
+- [Home](/)
+- **Start**
+  - [Golden path](guides/golden-path.md)
+  - [Smoke checklist](guides/smoke-checklist.md)
+  - [How to use Glint](guides/using-glint.md)
+  - [Setup](guides/setup.md)
+  - [Workflow](guides/workflow.md)
+- **Modes**
+  - [Editor modes](reference/editor-modes.md)
+  - [Copilot mode](guides/copilot-mode.md)
+  - [AI workflow](guides/ai-workflow.md)
+- **Ship**
+  - [Store upload](guides/store-upload.md)
+- **Reference**
+  - [Architecture](reference/architecture.md)
+  - [Session schema](reference/session-schema.md)
+  - [Project pack (.glint)](reference/project-pack.md)
+  - [Export spec](reference/export-spec.md)
+  - [WebSocket protocol](reference/websocket-protocol.md)
+  - [Frames](reference/frames.md)
+  - [Project structure](reference/project-structure.md)
+- [Deploy this site](DEPLOY.md)

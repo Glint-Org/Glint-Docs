@@ -1,6 +1,8 @@
 # Glint Docs
 
-Public reference for the Glint ecosystem. **These markdown files are the docs** - read them in the repo or on GitHub.
+Public reference for the Glint ecosystem. Read these markdown files **in the repo** or as a site:
+
+**https://glint-org.github.io/Glint-Docs/**
 
 Soft-launch path: **Capture / Bridge → Web (frames) → View (preview)**.
 
