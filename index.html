@@ -12,48 +12,283 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
   <style>
     :root {
-      --theme-color: #c9a227;
+      --theme-color: #b8941f;
+      --glint-ink: #1a1c1f;
+      --glint-muted: #5c6370;
+      --glint-line: #e8eaed;
+      --glint-side: #f7f6f3;
+      --glint-accent: #c9a227;
     }
-    .sidebar > h1.app-name {
-      margin: 0.6rem 0 0.4rem;
+
+    html, body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--glint-ink);
     }
-    .sidebar > h1 a {
+
+    /* Reading column */
+    .content {
+      padding-top: 24px;
+    }
+    .markdown-section {
+      max-width: 740px;
+      padding: 28px 36px 64px;
+      line-height: 1.65;
+      font-size: 16px;
+    }
+    .markdown-section h1,
+    .markdown-section h2,
+    .markdown-section h3 {
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: #1a1a1a;
+      line-height: 1.25;
+    }
+    .markdown-section h1 { margin-top: 0; }
+    .markdown-section h2 {
+      margin-top: 2rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--glint-line);
+    }
+    .markdown-section p,
+    .markdown-section li {
+      color: #2a2e35;
+    }
+    .markdown-section code {
+      background: #f3f1ea;
+      color: #5a4a12;
+      padding: 0.12em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    .markdown-section pre {
+      border-radius: 10px;
+      border: 1px solid var(--glint-line);
+    }
+    .markdown-section table {
+      display: block;
+      overflow-x: auto;
+    }
+    .markdown-section tr:nth-child(2n) {
+      background-color: #faf9f6;
+    }
+
+    /* Sidebar shell */
+    .sidebar {
+      background: var(--glint-side);
+      border-right: 1px solid var(--glint-line);
+      padding-top: 0 !important;
+    }
+    .sidebar .glint-side-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 14px 14px 10px;
+      border-bottom: 1px solid var(--glint-line);
+      position: sticky;
+      top: 0;
+      background: var(--glint-side);
+      z-index: 2;
+    }
+    .sidebar .app-name {
+      margin: 0 !important;
+      padding: 0 !important;
+      flex: 1;
+      min-width: 0;
+    }
+    .sidebar .app-name a {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--glint-ink) !important;
+      text-decoration: none;
+    }
+    .sidebar .app-name-link::before,
+    .sidebar .app-name-link img {
+      display: none !important;
+    }
+
+    .glint-side-toggle {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--glint-line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--glint-muted);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .glint-side-toggle:hover {
+      border-color: var(--glint-accent);
+      color: var(--glint-ink);
+      background: #fffdf5;
+    }
+    .glint-side-toggle svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    /* Search under title row */
+    .sidebar .search {
+      margin: 12px 12px 8px !important;
+      padding: 0 !important;
+      border-bottom: none !important;
+    }
+    .sidebar .search .input-wrap {
+      border: 1px solid var(--glint-line);
+      border-radius: 8px;
+      background: #fff;
+      overflow: hidden;
+    }
+    .sidebar .search input {
+      background: transparent !important;
+      box-shadow: none !important;
+      border: none !important;
+      padding: 10px 12px !important;
+      font-size: 13px;
+    }
+    .sidebar .search input:focus {
+      outline: none;
+    }
+    .sidebar .search .clear-button {
+      display: none !important;
+    }
+
+    .sidebar-nav {
+      padding: 4px 8px 28px !important;
+    }
+    .sidebar-nav p,
+    .sidebar-nav li strong {
+      margin: 14px 8px 6px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--glint-muted);
+    }
+    .sidebar-nav ul {
+      margin: 0;
+    }
+    .sidebar-nav li a {
+      border-radius: 8px;
+      padding: 7px 10px !important;
+      color: #3a3f48 !important;
+      font-size: 13.5px;
+      line-height: 1.35;
+    }
+    .sidebar-nav li a:hover {
+      background: #efece4;
+      text-decoration: none !important;
     }
     .sidebar-nav li.active > a {
+      background: #f3ead0;
+      color: #5a4708 !important;
       font-weight: 600;
-      border-right: 3px solid var(--theme-color);
+      border-right: none;
     }
-    /* Hamburger at top-left (vue theme defaults to bottom). */
+
+    /* Hide stock hamburger (replaced by header button) */
     .sidebar-toggle {
-      top: 10px;
-      bottom: auto !important;
-      background: transparent !important;
-      padding: 10px 12px;
+      display: none !important;
     }
-    .sidebar-toggle span {
-      background-color: #555;
-      width: 18px;
+
+    /* When sidebar is collapsed, show a compact open control */
+    .glint-open-side {
+      display: none;
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 30;
+      align-items: center;
+      gap: 8px;
+      height: 36px;
+      padding: 0 12px 0 10px;
+      border: 1px solid var(--glint-line);
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+      color: var(--glint-ink);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
     }
-    body.close .sidebar-toggle {
-      background: transparent !important;
+    body.close .glint-open-side {
+      display: inline-flex;
     }
+    .glint-open-side svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Aesthetic scrollbars */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #d4c48a #f0eee8;
+    }
+    *::-webkit-scrollbar {
+      width: 9px;
+      height: 9px;
+    }
+    *::-webkit-scrollbar-track {
+      background: #f0eee8;
+    }
+    *::-webkit-scrollbar-thumb {
+      background: #d4c48a;
+      border-radius: 999px;
+      border: 2px solid #f0eee8;
+    }
+    *::-webkit-scrollbar-thumb:hover {
+      background: var(--glint-accent);
+    }
+
     @media screen and (max-width: 768px) {
-      .sidebar-toggle {
-        top: 8px;
+      .markdown-section {
+        padding: 20px 18px 48px;
+        font-size: 15.5px;
       }
     }
   </style>
 </head>
 <body>
   <div id="app">Loading…</div>
+  <button type="button" class="glint-open-side" aria-label="Open docs menu" hidden>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    Docs
+  </button>
   <script>
-    // Project Pages live under /Glint-Docs/; local preview uses /
     var basePath = /^\/Glint-Docs(\/|$)/.test(location.pathname)
       ? '/Glint-Docs/'
       : '/';
+
+    var CHEVRON_LEFT =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>';
+    var CHEVRON_RIGHT =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+
+    function syncToggleUi() {
+      var closed = document.body.classList.contains('close');
+      var btn = document.querySelector('.glint-side-toggle');
+      var openBtn = document.querySelector('.glint-open-side');
+      if (btn) {
+        btn.innerHTML = closed ? CHEVRON_RIGHT : CHEVRON_LEFT;
+        btn.setAttribute('aria-label', closed ? 'Expand sidebar' : 'Collapse sidebar');
+        btn.title = closed ? 'Expand' : 'Collapse';
+      }
+      if (openBtn) {
+        openBtn.hidden = !closed;
+      }
+    }
+
+    function toggleSidebar() {
+      document.body.classList.toggle('close');
+      syncToggleUi();
+    }
 
     window.$docsify = {
       name: 'Glint Docs',
@@ -65,8 +300,6 @@
       subMaxLevel: 2,
       auto2top: true,
       relativePath: false,
-      // Always load the root sidebar so nested pages don't 404 _sidebar.md
-      // and so the active item stays in sync with the route.
       alias: {
         '/.*/_sidebar.md': '/_sidebar.md',
       },
@@ -74,8 +307,41 @@
       search: {
         placeholder: 'Search docs',
         noData: 'No results',
-        pathNamespaces: ['/guides', '/reference'],
       },
+      plugins: [
+        function (hook) {
+          hook.ready(function () {
+            var sidebar = document.querySelector('.sidebar');
+            if (!sidebar) return;
+
+            var nameEl = sidebar.querySelector('.app-name');
+            var searchEl = sidebar.querySelector('.search');
+
+            var header = document.createElement('div');
+            header.className = 'glint-side-header';
+
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'glint-side-toggle';
+            btn.addEventListener('click', toggleSidebar);
+
+            if (nameEl) header.appendChild(nameEl);
+            header.appendChild(btn);
+            sidebar.insertBefore(header, sidebar.firstChild);
+
+            if (searchEl) {
+              sidebar.insertBefore(searchEl, header.nextSibling);
+            }
+
+            var openBtn = document.querySelector('.glint-open-side');
+            if (openBtn) {
+              openBtn.addEventListener('click', toggleSidebar);
+            }
+
+            syncToggleUi();
+          });
+        },
+      ],
     };
   </script>
   <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
